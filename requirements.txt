@@ -3,3 +3,4 @@ requests==2.30.0
 beautifulsoup4==4.12.2
 ass==0.5.4
 SQLAlchemy==2.0.26
+python-dotenv==1.0.1

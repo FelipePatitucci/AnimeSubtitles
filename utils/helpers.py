@@ -1,4 +1,5 @@
 import ass
+import datetime
 import json
 import logging
 import lzma
@@ -290,6 +291,20 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
     return created
 
 
+def format_timedelta(delta: datetime.timedelta) -> str:
+    """
+    This is used to format the timedelta extracted from .ass files to a string format supported by sqlite
+    """
+    seconds = delta.seconds
+    microseconds = delta.microseconds
+
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    milliseconds = microseconds // 1000
+
+    return f"{hours:02}:{minutes:02}:{seconds:02}.{milliseconds:03}"
+
+
 def process_episode_data(
         path: str, episode: int, mal_id: int
 ) -> Tuple[List[List[str]], int]:
@@ -303,7 +318,7 @@ def process_episode_data(
         logger.debug(f'Reading {path.split("/")[-1]}...')
         for event in events:
             # we do not care about signs
-            if event.style.lower() in "signs" or \
+            if "sign" in event.style.lower() or \
                     event.name.lower() == "sign":
                 continue
 
@@ -316,7 +331,9 @@ def process_episode_data(
             # also remove brackets and change \N to space
             cleaned_text = prepare_text_for_insertion(event.text)
 
-            data.append([mal_id, episode, event.name, cleaned_text])
+            data.append(
+                [mal_id, episode, event.name, cleaned_text, event.start, event.end]
+            )
 
     return data, no_character_name
 
@@ -354,7 +371,7 @@ def build_df_from_ass_files(
             logger.info(f'Error reading {path}.')
 
     df = pd.DataFrame(
-        table, columns=['MAL_ID', 'EPISODE', 'NAME', 'QUOTE'])
+        table, columns=['MAL_ID', 'EPISODE', 'NAME', 'QUOTE', 'START_TIME', 'END_TIME'])
     df = df.astype({'MAL_ID': 'int32', 'EPISODE': 'int32'})
     logger.info(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
