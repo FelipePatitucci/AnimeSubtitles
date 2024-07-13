@@ -250,6 +250,9 @@ def get_all_subtitles_info(
 
         if len(final_object) == episode_count:
             # we are done, maybe the rest are from other seasons (let's hope)
+            logger.info(
+                f"Already got {episode_count} episode links. Skipping the remaining ones..."
+            )
             break
 
         link_url = item.get("link_url", "")

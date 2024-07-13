@@ -2,7 +2,7 @@ import json
 import logging
 import time
 import os
-# from typing import Dict, List
+import warnings
 
 from dotenv import load_dotenv
 from utils.parsers import (
@@ -17,6 +17,7 @@ from utils.writers import write_postgres, merge_quotes
 from utils.connectors import postgres_connector
 from utils.constants import FORMAT, DESIRED_SUBS
 
+warnings.filterwarnings('ignore')
 # setup logger
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -35,7 +36,7 @@ password = os.getenv("PASSWORD")
 # Specify parameters
 start = time.time()
 page_count = 1
-page_limit = 6
+page_limit = 99
 filter_links = None
 desired_subs = DESIRED_SUBS
 raw_schema = "raw_quotes"
@@ -101,14 +102,6 @@ try:
             schema=processed_schema,
             table_name="merged_" + anime
         )
-
-        # write_postgres(
-        #     df=df,
-        #     con=con,
-        #     schema=raw_schema,
-        #     table_name=anime
-        # )
-
 
 except Exception as err:
     logger.error(err)

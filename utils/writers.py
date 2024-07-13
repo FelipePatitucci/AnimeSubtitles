@@ -5,6 +5,7 @@ import pandas as pd
 import psycopg2.extras
 
 from .constants import FORMAT
+from .queries import query_create_table
 
 # setup logger
 logger = logging.getLogger(__name__)
@@ -49,11 +50,38 @@ def write_data(
     return num_rows
 
 
+def _create_table(
+    con,
+    schema: str,
+    table_name: str,
+) -> None:
+    cursor = con.cursor()
+    query = query_create_table % (schema, table_name)
+
+    cursor.execute(query)
+    con.commit()
+    cursor.close()
+
+
+def _truncate_table(
+    con,
+    schema: str,
+    table_name: str,
+) -> None:
+    cursor = con.cursor()
+    query = "TRUNCATE TABLE %s.%s;" % (schema, table_name)
+
+    cursor.execute(query)
+    con.commit()
+    cursor.close()
+
+
 def write_postgres(
     df: pd.DataFrame,
     con: Any,
     schema: str,
     table_name: str,
+    if_exists: Literal["replace", "append"] = "replace",
     clear_songs: bool = True
 ) -> None:
     # empty df
@@ -73,6 +101,14 @@ def write_postgres(
 
     logger.info(f"Preparing to write {len(df)} rows into dataframe...")
 
+    # need to create table if it not exists
+    _create_table(con, schema, table_name)
+
+    # give user option to clear table before insertion
+    if if_exists == "replace":
+        logger.info(f"Truncating table {schema}.{table_name}...")
+        _truncate_table(con, schema, table_name)
+
     try:
         df_columns = [col.lower() for col in df.columns]
         columns = ",".join(df_columns)
@@ -84,6 +120,7 @@ def write_postgres(
         insert_stmt = f"INSERT INTO {schema}.{table_name} ({columns}) {values}"
 
         cur = con.cursor()
+        # insert in batches
         psycopg2.extras.execute_batch(cur, insert_stmt, df.values)
         con.commit()
         cur.close()

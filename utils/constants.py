@@ -25,3 +25,8 @@ MEMBER_CUT = 20000
 PATH_ID_MEMBER_MAP = "misc/mal_id_member_count.json"
 # this is for episode_number logic
 NOT_ALLOWED_CHARACTERS = ["x", "."]
+# reserved characters remap (for table names)
+RESERVED_CHARACTERS_REMAP = {
+    ":": "_" * 2,
+    "!": "_" * 3
+}

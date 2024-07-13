@@ -20,7 +20,8 @@ from .constants import (
     DESIRED_SUBS,
     FORMAT,
     PATH_ID_MEMBER_MAP,
-    NOT_ALLOWED_CHARACTERS
+    NOT_ALLOWED_CHARACTERS,
+    RESERVED_CHARACTERS_REMAP
 )
 
 # Setup logger
@@ -493,8 +494,15 @@ def find_season(input_string: str, provider: str) -> str:
 
 
 def remove_special_characters(input_string: str) -> str:
-    pattern = r'[\\\"\',.;:?-]'
+    pattern = r'[\\\"\'\[\]/(),.;?~-]'
     clean_text = re.sub(pattern, '', input_string)
+
+    # some animes use ! and : to distinguish between seasons
+    # example: nisekoi and nisekoi:
+    # hence, for these symbols, we change to multiples of "_" character
+    for char, new_char in RESERVED_CHARACTERS_REMAP.items():
+        clean_text = clean_text.replace(char, new_char)
+
     return clean_text
 
 
