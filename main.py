@@ -37,7 +37,7 @@ password = os.getenv("PASSWORD")
 start = time.time()
 page_count = 1
 page_limit = 99
-filter_links = None
+filter_links = []
 desired_subs = DESIRED_SUBS
 raw_schema = "raw_quotes"
 processed_schema = "processed_quotes"
@@ -57,55 +57,58 @@ end = time.time()
 logger.info(f"Finished getting links in {round(end - start)}s")
 
 # downloading data from website and generating ass files
-file_path = "examples/page_1.json"
-anime_list = download_subtitles(
-    file_path=file_path,
-)
-created = generate_ass_files()
+for _, file in enumerate(os.listdir("examples")):
+    file_path = "examples/" + file
+    anime_list = download_subtitles(
+        file_path=file_path,
+    )
+    created = generate_ass_files()
+    # created = ""
 
-# writing data to db for each anime
-if not created:
-    created = os.listdir("data")
+    if not created:
+        # probably, we already had built all the files
+        with open(file_path, "r+", encoding="utf-8") as f:
+            created = json.load(f).keys()
+            print(created)
 
-con = postgres_connector(
-    user=user,
-    password=password,
-    host=host,
-    database=database,
-    port=port
-)
+    con = postgres_connector(
+        user=user,
+        password=password,
+        host=host,
+        database=database,
+        port=port
+    )
 
-try:
-    for anime in created:
-        logger.info(f"---------- Processing anime: {anime} ----------")
-        df = build_df_from_ass_files(
-            file_path=file_path,
-            anime_name=anime
-        )
+    try:
+        # writing data to db for each anime
+        for anime in created:
+            logger.info(f"---------- Processing anime: {anime} ----------")
+            df = build_df_from_ass_files(
+                file_path=file_path,
+                anime_name=anime
+            )
 
-        write_postgres(
-            df=df,
-            con=con,
-            schema=raw_schema,
-            table_name=anime
-        )
+            if df is None:
+                continue
 
-        df = merge_quotes(
-            conn=con,
-            schema=raw_schema,
-            table_name=anime
-        )
+            df = merge_quotes(
+                conn=con,
+                schema=raw_schema,
+                table_name=anime,
+                df=df
+            )
 
-        write_postgres(
-            df=df,
-            con=con,
-            schema=processed_schema,
-            table_name="merged_" + anime
-        )
+            write_postgres(
+                df=df,
+                con=con,
+                schema=raw_schema,
+                table_name=anime,
+                if_exists="replace"
+            )
 
-except Exception as err:
-    logger.error(err)
-    raise
+    except Exception as err:
+        logger.error(err)
+        raise
 
-finally:
-    con.close()
+    finally:
+        con.close()

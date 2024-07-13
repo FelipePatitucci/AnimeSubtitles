@@ -29,12 +29,12 @@ def write_data(
 
     if clear_songs:
         # TODO: this could use some work (maybe change to isin (op, opening, etc.))
-        songs = df[(df["NAME"] == "ED") | (df["NAME"] == "OP")]
+        songs = df[(df["name"] == "ED") | (df["name"] == "OP")]
         if len(songs) > 0:
             # drop every row with op or ed
             df = df.drop(songs.index)
             # now just concat the unique texts from cleaned ops and eds
-            songs = songs.drop_duplicates(subset=["NAME", "QUOTE"])
+            songs = songs.drop_duplicates(subset=["name", "quote"])
             df = pd.concat([df, songs])
 
     logger.info(f"Preparing to write {len(df)} rows into dataframe...")
@@ -91,12 +91,14 @@ def write_postgres(
 
     if clear_songs:
         # TODO: this could use some work (maybe change to isin (op, opening, etc.))
-        songs = df[(df["NAME"] == "ED") | (df["NAME"] == "OP")]
+        songs = df[df["name"].isin(
+            ["ED", "ed", "Ending", "OP", "op", "Opening"]
+        )]
         if len(songs) > 0:
             # drop every row with op or ed
             df = df.drop(songs.index)
             # now just concat the unique texts from cleaned ops and eds
-            songs = songs.drop_duplicates(subset=["NAME", "QUOTE"])
+            songs = songs.drop_duplicates(subset=["name", "quote"])
             df = pd.concat([df, songs])
 
     logger.info(f"Preparing to write {len(df)} rows into dataframe...")
@@ -134,7 +136,8 @@ def write_postgres(
 def merge_quotes(
     conn,
     schema: str,
-    table_name: str
+    table_name: str,
+    df: Optional[pd.DataFrame] = None
 ) -> pd.DataFrame:
     """
     Merges consecutive rows with the same NAME and EPISODE into a single row
@@ -144,6 +147,7 @@ def merge_quotes(
     - conn (Postgres conn): Postgres connection.
     - schema (str): Name of the schema to read from.
     - table_name (str): Name of the table in the database to read from.
+    - df (pd.DataFrame): If provided, will not query database
 
     Returns:
     - pd.DataFrame: DataFrame containing the merged data.
@@ -152,8 +156,9 @@ def merge_quotes(
     merged_df = quote_merge(conn, 'raw_quotes', 'my_anime')
     """
 
-    query = f'SELECT * FROM {schema}.{table_name};'
-    df = pd.read_sql(query, conn)
+    if df is None:
+        query = f'SELECT * FROM {schema}.{table_name};'
+        df = pd.read_sql(query, conn)
 
     new_df = []
 
@@ -191,9 +196,9 @@ def merge_quotes(
     new_df = pd.DataFrame(
         new_df,
         columns=[
-            'MAL_ID', 'EPISODE', 'NAME', 'QUOTE', 'START_TIME', 'END_TIME'
+            'mal_id', 'episode', 'name', 'quote', 'start_time', 'end_time'
         ]
     )
-    new_df = new_df.astype({'MAL_ID': 'int32', 'EPISODE': 'int32'})
+    new_df = new_df.astype({'mal_id': 'int32', 'episode': 'int32'})
 
     return new_df

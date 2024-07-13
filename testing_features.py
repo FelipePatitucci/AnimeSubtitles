@@ -67,3 +67,6 @@ st = "\"Oshi no- Ko-\""
 #         print(prepare_text_for_insertion(event.text))
 #         if i > 5:
 #             break
+with open("examples/page_1.json", "r+", encoding="utf-8") as f:
+    teste = json.load(f)
+    print(list(teste.keys()))

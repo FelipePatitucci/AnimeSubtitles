@@ -323,8 +323,12 @@ def process_episode_data(
                     event.name.lower() == "sign":
                 continue
 
+            if event.start == event.end:
+                # it's probably just a text showing on screen
+                continue
+
             # we will probably not have the character names
-            elif not event.name:
+            if not event.name:
                 event.name = "Unknown"
                 no_character_name += 1
 
@@ -342,11 +346,15 @@ def process_episode_data(
 def build_df_from_ass_files(
     file_path: str,
     anime_name: str
-) -> pd.DataFrame:
+) -> Optional[pd.DataFrame]:
     data = process_data_input(file_path)
 
     # nothing to be done
     if not data:
+        return
+
+    elif not data[anime_name]["data"]:
+        logger.info(f"No links available for anime {anime_name}. Skipping...")
         return
 
     no_character_name = 0
@@ -368,12 +376,13 @@ def build_df_from_ass_files(
             table += episode_data
             no_character_name += no_character
 
-        except Exception:
-            logger.info(f'Error reading {path}.')
+        except Exception as err:
+            logger.error(f'Error reading {path}.')
+            raise err
 
     df = pd.DataFrame(
-        table, columns=['MAL_ID', 'EPISODE', 'NAME', 'QUOTE', 'START_TIME', 'END_TIME'])
-    df = df.astype({'MAL_ID': 'int32', 'EPISODE': 'int32'})
+        table, columns=['mal_id', 'episode', 'name', 'quote', 'start_time', 'end_time'])
+    df = df.astype({'mal_id': 'int32', 'episode': 'int32'})
     logger.info(
         f"{len(df) - no_character_name}/{len(df)} quotes with character name.")
 

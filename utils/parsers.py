@@ -45,7 +45,7 @@ def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
         data = response.text
         soup = BeautifulSoup(data, 'html.parser')
         for div in soup.find_all('div', class_='home_list_entry'):
-            if '(finished)' in div.text:
+            if '(finished)' in div.text or '(movie)' in div.text:
                 finished_entries.append(div)
         logger.info(f"Processed page {page} request.")
 
@@ -273,11 +273,15 @@ def get_all_subtitles_info(
             continue
 
         if not episode_number:
-            # not worth it (may be .5 episodes or some alien format)
-            logger.debug(
-                f"Skipped episode {link_title} due to not finding ep number."
-            )
-            continue
+            if episode_count == 1:
+                # assuming it is a movie, so set ep to "1"
+                episode_number = 1
+            else:
+                # not worth it (may be .5 episodes or some alien format)
+                logger.info(
+                    f"Skipped episode {link_title} due to not finding ep number."
+                )
+                continue
 
         item["sub_link"] = sub_link
         item["sub_info"] = sub_info
