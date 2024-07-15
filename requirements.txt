@@ -4,3 +4,4 @@ beautifulsoup4==4.12.2
 ass==0.5.4
 SQLAlchemy==2.0.26
 python-dotenv==1.0.1
+prefect==2.19.7

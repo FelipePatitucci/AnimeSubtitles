@@ -82,7 +82,8 @@ def write_postgres(
     schema: str,
     table_name: str,
     if_exists: Literal["replace", "append"] = "replace",
-    clear_songs: bool = True
+    clear_songs: bool = True,
+    cleanup: bool = True
 ) -> None:
     # empty df
     if df.empty:
@@ -129,6 +130,11 @@ def write_postgres(
 
     except Exception as e:
         logger.error(str(e))
+        raise
+
+    finally:
+        if cleanup:
+            con.close()
 
     return
 

@@ -1,513 +1,95 @@
 {
-    "boku_no_kokoro_no_yabai_yatsu_2024": {
+    "lv2_kara_cheat_datta_moto_yuusha_kouho_no_mattari_isekai_life": {
         "data": [
             {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 13 (1080p) [46EBE198].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-13-1080p.1834739",
-                "sub_link": "https://animetosho.org/storage/attach/001cfdc0/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2013%20%281080p%29%20%5B46EBE198%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "13"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 14 (1080p) [44D99176].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-14-1080p.1836674",
-                "sub_link": "https://animetosho.org/storage/attach/001d11eb/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2014%20%281080p%29%20%5B44D99176%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "14"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 15 (720p) [4E09AE75].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-15-720p.1838832",
-                "sub_link": "https://animetosho.org/storage/attach/001d2349/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2015%20%28720p%29%20%5B4E09AE75%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "15"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 16 (1080p) [3C1DA863].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-16-1080p.1840976",
-                "sub_link": "https://animetosho.org/storage/attach/001d3610/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2016%20%281080p%29%20%5B3C1DA863%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "16"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 17 (1080p) [08E0CCE7].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-17-1080p.1842935",
-                "sub_link": "https://animetosho.org/storage/attach/001d4f8f/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2017%20%281080p%29%20%5B08E0CCE7%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "17"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 18 (1080p) [D496AC68].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-18-1080p.1844783",
-                "sub_link": "https://animetosho.org/storage/attach/001d66c1/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2018%20%281080p%29%20%5BD496AC68%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "18"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 19 (1080p) [66C16FCC].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-19-1080p.1846510",
-                "sub_link": "https://animetosho.org/storage/attach/001d79fa/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2019%20%281080p%29%20%5B66C16FCC%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "19"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 20 (1080p) [B90591B0].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-20-1080p.1848326",
-                "sub_link": "https://animetosho.org/storage/attach/001d8db5/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2020%20%281080p%29%20%5BB90591B0%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "20"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 21 (1080p) [B0648ECB].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-21-1080p.1850081",
-                "sub_link": "https://animetosho.org/storage/attach/001da122/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2021%20%281080p%29%20%5BB0648ECB%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "21"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 22 (480p) [9FB08DF6].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-22-480p.1851640",
-                "sub_link": "https://animetosho.org/storage/attach/001db4fa/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2022%20%28480p%29%20%5B9FB08DF6%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "22"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 23 (1080p) [9B4D933F].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-23-1080p.1853514",
-                "sub_link": "https://animetosho.org/storage/attach/001dc5a0/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2023%20%281080p%29%20%5B9B4D933F%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "23"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 24 (1080p) [94376C83].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-24-1080p.1856213",
-                "sub_link": "https://animetosho.org/storage/attach/001dda43/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2024%20%281080p%29%20%5B94376C83%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "24"
-            },
-            {
-                "link_title": "[SubsPlease] Boku no Kokoro no Yabai Yatsu - 25 (720p) [FA54EDD3].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-boku-no-kokoro-yabai-yatsu-25-720p.1859222",
-                "sub_link": "https://animetosho.org/storage/attach/001dee94/%5BSubsPlease%5D%20Boku%20no%20Kokoro%20no%20Yabai%20Yatsu%20-%2025%20%28720p%29%20%5BFA54EDD3%5D_track3.eng.ass.xz",
-                "sub_info": "English [eng, ASS]",
-                "episode_number": "25"
-            }
-        ],
-        "metadata": {
-            "episode_count": 13,
-            "mal_id": 55690,
-            "original_name": "Boku no Kokoro no Yabai Yatsu (2024)"
-        }
-    },
-    "kaijuu_8_gou": {
-        "data": [
-            {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 01 (480p) [E7479F2F].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-01-480p-e7479f2f-mkv.1864046",
-                "sub_link": "https://animetosho.org/storage/attach/001e3353/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2001%20%28480p%29%20%5BE7479F2F%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 01 (1080p) [A1105109].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1862601",
+                "sub_link": "https://animetosho.org/storage/attach/001e1fe2/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2001%20%281080p%29%20%5BA1105109%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "01"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 02 (480p) [5856872C].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-02-480p-5856872c-mkv.1866467",
-                "sub_link": "https://animetosho.org/storage/attach/001e4fd3/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2002%20%28480p%29%20%5B5856872C%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 02 (480p) [79A0ED54].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1864857",
+                "sub_link": "https://animetosho.org/storage/attach/001e4014/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2002%20%28480p%29%20%5B79A0ED54%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "02"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 03 (480p) [15793064].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-03-480p-15793064-mkv.1869227",
-                "sub_link": "https://animetosho.org/storage/attach/001e6c43/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2003%20%28480p%29%20%5B15793064%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 03 (720p) [872F36FB].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1867225",
+                "sub_link": "https://animetosho.org/storage/attach/001e594e/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2003%20%28720p%29%20%5B872F36FB%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "03"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 04 (1080p) [6DF3F88F].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-04-1080p-6df3f88f-mkv.1871734",
-                "sub_link": "https://animetosho.org/storage/attach/001e8f87/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2004%20%281080p%29%20%5B6DF3F88F%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 04 (1080p) [32D3BB42].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1869964",
+                "sub_link": "https://animetosho.org/storage/attach/001e76c2/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2004%20%281080p%29%20%5B32D3BB42%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "04"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 05 (480p) [7845D607].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-05-480p-7845d607-mkv.1873937",
-                "sub_link": "https://animetosho.org/storage/attach/001eab2c/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2005%20%28480p%29%20%5B7845D607%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 05 (1080p) [6FB132E5].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1872462",
+                "sub_link": "https://animetosho.org/storage/attach/001e9886/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2005%20%281080p%29%20%5B6FB132E5%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "05"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 06 (720p) [D109C342].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-06-720p-d109c342-mkv.1876023",
-                "sub_link": "https://animetosho.org/storage/attach/001ec7dc/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2006%20%28720p%29%20%5BD109C342%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 06 (1080p) [D1093E8B].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1874741",
+                "sub_link": "https://animetosho.org/storage/attach/001eb671/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2006%20%281080p%29%20%5BD1093E8B%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "06"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 07 (480p) [09AD7D87].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-07-480p-09ad7d87-mkv.1878265",
-                "sub_link": "https://animetosho.org/storage/attach/001ee125/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2007%20%28480p%29%20%5B09AD7D87%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 07 (720p) [71820E1C].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1876634",
+                "sub_link": "https://animetosho.org/storage/attach/001ecef9/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2007%20%28720p%29%20%5B71820E1C%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "07"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 08 (1080p) [6C5D0A3D].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-08-1080p-6c5d0a3d-mkv.1880660",
-                "sub_link": "https://animetosho.org/storage/attach/001efd97/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2008%20%281080p%29%20%5B6C5D0A3D%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 08 (1080p) [0085667F].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1878943",
+                "sub_link": "https://animetosho.org/storage/attach/001eeb1b/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2008%20%281080p%29%20%5B0085667F%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "08"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 09 (480p) [D4AB5F02].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-09-480p-d4ab5f02-mkv.1882951",
-                "sub_link": "https://animetosho.org/storage/attach/001f164d/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2009%20%28480p%29%20%5BD4AB5F02%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 09 (1080p) [1B41619A].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1881297",
+                "sub_link": "https://animetosho.org/storage/attach/001f05f8/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2009%20%281080p%29%20%5B1B41619A%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "09"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 10 (480p) [613422D5].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-10-480p-613422d5-mkv.1885003",
-                "sub_link": "https://animetosho.org/storage/attach/001f40f2/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2010%20%28480p%29%20%5B613422D5%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 10 (720p) [DCF0C64F].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1883526",
+                "sub_link": "https://animetosho.org/storage/attach/001f2044/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2010%20%28720p%29%20%5BDCF0C64F%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "10"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 11 (1080p) [BBF545C6].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-11-1080p-bbf545c6-mkv.1887268",
-                "sub_link": "https://animetosho.org/storage/attach/001f6458/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2011%20%281080p%29%20%5BBBF545C6%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 11 (720p) [23E3E74E].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1885544",
+                "sub_link": "https://animetosho.org/storage/attach/001f4bee/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2011%20%28720p%29%20%5B23E3E74E%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "11"
             },
             {
-                "link_title": "[SubsPlease] Kaijuu 8-gou - 12 (480p) [647F5CC7].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kaijuu-8-gou-12-480p-647f5cc7-mkv.1889657",
-                "sub_link": "https://animetosho.org/storage/attach/001f8314/%5BSubsPlease%5D%20Kaijuu%208-gou%20-%2012%20%28480p%29%20%5B647F5CC7%5D_track3.eng.ass.xz",
+                "link_title": "[SubsPlease] Lv2 kara Cheat datta Motoyuusha Kouho no Mattari Isekai Life - 12 (1080p) [5B47E29D].mkv",
+                "link_url": "https://animetosho.org/view/subsplease-lv2-kara-cheat-datta-motoyuusha-kouho-no.1887926",
+                "sub_link": "https://animetosho.org/storage/attach/001f7461/%5BSubsPlease%5D%20Lv2%20kara%20Cheat%20datta%20Motoyuusha%20Kouho%20no%20Mattari%20Isekai%20Life%20-%2012%20%281080p%29%20%5B5B47E29D%5D_track3.eng.ass.xz",
                 "sub_info": "English subs [eng, ASS]",
                 "episode_number": "12"
             }
         ],
         "metadata": {
             "episode_count": 12,
-            "mal_id": 52588,
-            "original_name": "Kaijuu 8 Gou"
-        }
-    },
-    "kaguyahime_no_monogatari": {
-        "data": [
-            {
-                "link_title": "[Trix] The Tale of the Princess Kaguya (2013) [Dual Audio] [Multi Subs] (BD 1080p AV1) - Kaguya-hime no Monogatari - Le Conte de La Princesse Kaguya VF-VOSTFR",
-                "link_url": "https://animetosho.org/view/trix-tale-princess-kaguya-2013-dual-audio-multi.n1779471",
-                "sub_link": "https://animetosho.org/storage/attach/001d7c93/%5BTrix%5D%20The%20Tale%20of%20Princess%20Kaguya%20%282013%29%20%28BD%201080p%20AV1%29%20%5B035022EF%5D_track5.eng.ass.xz",
-                "sub_info": "Full Subtitles [Orphan-fussoir] [eng, ASS]",
-                "episode_number": 1
-            }
-        ],
-        "metadata": {
-            "episode_count": 1,
-            "mal_id": 16664,
-            "original_name": "Kaguya-hime no Monogatari"
-        }
-    },
-    "kimitachi_wa_dou_ikiru_ka": {
-        "data": [
-            {
-                "link_title": "[Okay-Subs] The Boy and the Heron (2023) (UHD BD 1108p) | Kimitachi wa Dou Ikiru ka | How Do You Live?",
-                "link_url": "https://animetosho.org/view/okay-subs-boy-heron-2023-uhd-bd-1108p.n1843107",
-                "sub_link": "https://animetosho.org/storage/attach/001fa7c1/%5BOkay-Subs%5D%20The%20Boy%20and%20the%20Heron%20%282023%29%20%28UHD%20BD%201108p%29%20%5BCC33DF8A%5D_track3.eng.ass.xz",
-                "sub_info": "eng [ASS]",
-                "episode_number": 1
-            }
-        ],
-        "metadata": {
-            "episode_count": 1,
-            "mal_id": 36699,
-            "original_name": "Kimitachi wa Dou Ikiru ka"
-        }
-    },
-    "jaku_chara_tomozakikun": {
-        "data": [
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 01 (1080p) [AB5C542F].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-01-1080p-ab5c542f-mkv.1528253",
-                "sub_link": "https://animetosho.org/storage/attach/00111d58/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2001%20%281080p%29%20%5BAB5C542F%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "01"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 02 (540p) [26D23CFE].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-02-540p-26d23cfe-mkv.1530103",
-                "sub_link": "https://animetosho.org/storage/attach/00113077/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2002%20%28540p%29%20%5B26D23CFE%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "02"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 03 (540p) [D126F3E2].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-03-540p-d126f3e2-mkv.1531742",
-                "sub_link": "https://animetosho.org/storage/attach/00114869/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2003%20%28540p%29%20%5BD126F3E2%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "03"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 04 (540p) [3262CFBC].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-04-540p-3262cfbc-mkv.1533970",
-                "sub_link": "https://animetosho.org/storage/attach/00115a2e/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2004%20%28540p%29%20%5B3262CFBC%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "04"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 05 (540p) [6BFB8ED7].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-05-540p-6bfb8ed7-mkv.1536064",
-                "sub_link": "https://animetosho.org/storage/attach/00116d6b/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2005%20%28540p%29%20%5B6BFB8ED7%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "05"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 06 (540p) [036646B4].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-06-540p-036646b4-mkv.1537994",
-                "sub_link": "https://animetosho.org/storage/attach/00118170/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2006%20%28540p%29%20%5B036646B4%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "06"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 07 (540p) [0CF9B9A1].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-07-540p-0cf9b9a1-mkv.1540203",
-                "sub_link": "https://animetosho.org/storage/attach/001194c3/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2007%20%28540p%29%20%5B0CF9B9A1%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "07"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 08 (540p) [3A3CCA93].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-08-540p-3a3cca93-mkv.1542357",
-                "sub_link": "https://animetosho.org/storage/attach/0011aebd/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2008%20%28540p%29%20%5B3A3CCA93%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "08"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 09 (1080p) [F68CF3A0].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-09-1080p-f68cf3a0-mkv.1544477",
-                "sub_link": "https://animetosho.org/storage/attach/0011c8f8/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2009%20%281080p%29%20%5BF68CF3A0%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "09"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 10 (720p) [FFD2E02B].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-10-720p-ffd2e02b-mkv.1546413",
-                "sub_link": "https://animetosho.org/storage/attach/0011e103/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2010%20%28720p%29%20%5BFFD2E02B%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "10"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 11 (540p) [0E2884C4].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-11-540p-0e2884c4-mkv.1548293",
-                "sub_link": "https://animetosho.org/storage/attach/0011f7e1/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2011%20%28540p%29%20%5B0E2884C4%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "11"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun - 12 (540p) [81A672DE].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-12-540p-81a672de-mkv.1550219",
-                "sub_link": "https://animetosho.org/storage/attach/00120bbc/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20-%2012%20%28540p%29%20%5B81A672DE%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "12"
-            }
-        ],
-        "metadata": {
-            "episode_count": 12,
-            "mal_id": 40530,
-            "original_name": "Jaku Chara Tomozaki-kun"
-        }
-    },
-    "jaku_chara_tomozakikun_2nd_stage": {
-        "data": [
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 01 (480p) [98045D2B].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-01-480p-98045d2b-mkv.1833728",
-                "sub_link": "https://animetosho.org/storage/attach/001cf54a/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2001%20%28480p%29%20%5B98045D2B%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "01"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 02 (480p) [B65E5EAD].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-02-480p-b65e5ead-mkv.1835724",
-                "sub_link": "https://animetosho.org/storage/attach/001d046e/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2002%20%28480p%29%20%5BB65E5EAD%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "02"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 03 (480p) [DABA0050].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-03-480p-daba0050-mkv.1837620",
-                "sub_link": "https://animetosho.org/storage/attach/001d19f4/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2003%20%28480p%29%20%5BDABA0050%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "03"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 04 (480p) [54E118CF].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-04-480p-54e118cf-mkv.1839900",
-                "sub_link": "https://animetosho.org/storage/attach/001d2d7c/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2004%20%28480p%29%20%5B54E118CF%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "04"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 05 (480p) [E6E2F803].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-05-480p-e6e2f803-mkv.1841937",
-                "sub_link": "https://animetosho.org/storage/attach/001d41c0/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2005%20%28480p%29%20%5BE6E2F803%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "05"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 06 (480p) [83D85096].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-06-480p-83d85096-mkv.1843888",
-                "sub_link": "https://animetosho.org/storage/attach/001d5ca3/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2006%20%28480p%29%20%5B83D85096%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "06"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 07 (480p) [667FC7F1].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-07-480p-667fc7f1-mkv.1845634",
-                "sub_link": "https://animetosho.org/storage/attach/001d7259/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2007%20%28480p%29%20%5B667FC7F1%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "07"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 08 (480p) [1AB39F00].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-08-480p-1ab39f00-mkv.1847387",
-                "sub_link": "https://animetosho.org/storage/attach/001d8468/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2008%20%28480p%29%20%5B1AB39F00%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "08"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 09 (480p) [2D3061AA].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-09-480p-2d3061aa-mkv.1849227",
-                "sub_link": "https://animetosho.org/storage/attach/001d988e/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2009%20%28480p%29%20%5B2D3061AA%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "09"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 10 (1080p) [851398EB].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-10-1080p-851398eb-mkv.1850777",
-                "sub_link": "https://animetosho.org/storage/attach/001dac3b/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2010%20%281080p%29%20%5B851398EB%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "10"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 11 (480p) [EAC2746A].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-11-480p-eac2746a-mkv.1852586",
-                "sub_link": "https://animetosho.org/storage/attach/001dbceb/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2011%20%28480p%29%20%5BEAC2746A%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "11"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 12 (1080p) [09E0BD84].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-12-1080p-09e0bd84-mkv.1854774",
-                "sub_link": "https://animetosho.org/storage/attach/001dcf2f/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2012%20%281080p%29%20%5B09E0BD84%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "12"
-            },
-            {
-                "link_title": "[SubsPlease] Jaku-Chara Tomozaki-kun S2 - 13 (480p) [26FDC479].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-jaku-chara-tomozaki-kun-s2-13-480p-26fdc479-mkv.1857720",
-                "sub_link": "https://animetosho.org/storage/attach/001de3f6/%5BSubsPlease%5D%20Jaku-Chara%20Tomozaki-kun%20S2%20-%2013%20%28480p%29%20%5B26FDC479%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "13"
-            }
-        ],
-        "metadata": {
-            "episode_count": 13,
-            "mal_id": 50803,
-            "original_name": "Jaku Chara Tomozaki-kun 2nd Stage"
-        }
-    },
-    "kenka_dokugaku": {
-        "data": [
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 01 (1080p) [E368E745].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-01-1080p-e368e745-mkv.1863133",
-                "sub_link": "https://animetosho.org/storage/attach/001e2808/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2001%20%281080p%29%20%5BE368E745%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "01"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 02 (1080p) [8E673A1A].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-02-1080p-8e673a1a-mkv.1865663",
-                "sub_link": "https://animetosho.org/storage/attach/001e4832/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2002%20%281080p%29%20%5B8E673A1A%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "02"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 03 (720p) [25B6E1BD].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-03-720p-25b6e1bd-mkv.1868046",
-                "sub_link": "https://animetosho.org/storage/attach/001e6177/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2003%20%28720p%29%20%5B25B6E1BD%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "03"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 04 (1080p) [124264AA].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-04-1080p-124264aa-mkv.1870700",
-                "sub_link": "https://animetosho.org/storage/attach/001e84c6/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2004%20%281080p%29%20%5B124264AA%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "04"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 05 (480p) [1B53433B].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-05-480p-1b53433b-mkv.1873014",
-                "sub_link": "https://animetosho.org/storage/attach/001e9fd2/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2005%20%28480p%29%20%5B1B53433B%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "05"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 06 (1080p) [86893ADD].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-06-1080p-86893add-mkv.1875218",
-                "sub_link": "https://animetosho.org/storage/attach/001ebc03/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2006%20%281080p%29%20%5B86893ADD%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "06"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 07 (720p) [CBE41836].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-07-720p-cbe41836-mkv.1877310",
-                "sub_link": "https://animetosho.org/storage/attach/001ed495/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2007%20%28720p%29%20%5BCBE41836%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "07"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 08 (480p) [6D2768A4].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-08-480p-6d2768a4-mkv.1879680",
-                "sub_link": "https://animetosho.org/storage/attach/001ef484/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2008%20%28480p%29%20%5B6D2768A4%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "08"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 09 (480p) [D172D787].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-09-480p-d172d787-mkv.1882189",
-                "sub_link": "https://animetosho.org/storage/attach/001f0e0f/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2009%20%28480p%29%20%5BD172D787%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "09"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 10 (480p) [32975955].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-10-480p-32975955-mkv.1884270",
-                "sub_link": "https://animetosho.org/storage/attach/001f2925/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2010%20%28480p%29%20%5B32975955%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "10"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 11 (1080p) [56ED048A].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-11-1080p-56ed048a-mkv.1886250",
-                "sub_link": "https://animetosho.org/storage/attach/001f5242/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2011%20%281080p%29%20%5B56ED048A%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "11"
-            },
-            {
-                "link_title": "[SubsPlease] Kenka Dokugaku - 12 (1080p) [7CC7C7D7].mkv",
-                "link_url": "https://animetosho.org/view/subsplease-kenka-dokugaku-12-1080p-7cc7c7d7-mkv.1888631",
-                "sub_link": "https://animetosho.org/storage/attach/001f78c4/%5BSubsPlease%5D%20Kenka%20Dokugaku%20-%2012%20%281080p%29%20%5B7CC7C7D7%5D_track3.eng.ass.xz",
-                "sub_info": "English subs [eng, ASS]",
-                "episode_number": "12"
-            }
-        ],
-        "metadata": {
-            "episode_count": 12,
-            "mal_id": 58080,
-            "original_name": "Kenka Dokugaku"
+            "mal_id": 56923,
+            "original_name": "Lv2 kara Cheat datta Moto Yuusha Kouho no Mattari Isekai Life"
         }
     }
 }
