@@ -1,34 +1,38 @@
-import logging
+# import logging
 from typing import Any, Dict
+
+from prefect import get_run_logger
+
+from utils.constants import DESIRED_SUBS, MEMBER_CUT
+from utils.helpers import (
+    check_for_id,
+    extract_titles_and_anime_links,
+    filter_links_from_provider,
+    remove_special_characters,
+    sort_options_by_priority,
+)
 from utils.parsers import (
+    get_all_links_from_provider,
+    get_all_subtitles_info,
     get_animes_finished_from_page,
     get_batch_options_and_episode_count,
     get_subtitle_links,
-    get_all_links_from_provider,
-    get_all_subtitles_info,
 )
-from utils.helpers import (
-    extract_titles_and_anime_links,
-    filter_links_from_provider,
-    sort_options_by_priority,
-    check_for_id,
-    remove_special_characters
-)
-from utils.constants import FORMAT, DESIRED_SUBS, MEMBER_CUT
 
-logger = logging.getLogger(__name__)
-level = logging.INFO
-logging.basicConfig(
-    format=FORMAT,
-    level=level,
-    handlers=[logging.StreamHandler()])
+# logger = logging.getLogger(__name__)
+# level = logging.INFO
+# logging.basicConfig(
+#     format=FORMAT,
+#     level=level,
+#     handlers=[logging.StreamHandler()])
 
 
 def build_json_with_links(
     page: int = 1,
     limit_per_page: int = 1,
     filter_links: list[str] = None,
-    desired_subs: str = DESIRED_SUBS
+    desired_subs: str = DESIRED_SUBS,
+    already_collected_animes: dict[str, bool] = dict()
 ) -> Dict[str, Any]:
     """
     Constructs a dictionary containing anime titles and corresponding lists
@@ -60,6 +64,7 @@ def build_json_with_links(
     It continues processing next titles or pages until the specified limit is 
     reached or there are no more entries.
     """
+    logger = get_run_logger()
     data = {}
     if filter_links is None:
         filter_links = []
@@ -90,6 +95,13 @@ def build_json_with_links(
     for title, link in zip(titles[:limit_per_page], links[:limit_per_page]):
         logger.info(f"Processing link: {link}")
         logger.info(f"Processing anime: {title}")
+
+        # check if we already have this full entry
+        if already_collected_animes.get(title, False):
+            logger.info(
+                f"Anime [{title}] already completed in database. Skipping..."
+            )
+            continue
 
         providers_info, provider_names, episode_count, mal_id = \
             get_batch_options_and_episode_count(title=title, link=link)

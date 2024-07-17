@@ -1,5 +1,5 @@
 import json
-import logging
+# import logging
 import time
 import os
 import warnings
@@ -9,28 +9,28 @@ from typing import Any, Optional
 
 import pandas as pd
 from dotenv import load_dotenv
-from prefect import flow, task
+from prefect import flow, task, get_run_logger
 
 from utils.connectors import postgres_connector
-from utils.constants import DESIRED_SUBS, FORMAT
+from utils.constants import DESIRED_SUBS
 from utils.helpers import (
     build_df_from_ass_files,
     generate_ass_files,
 )
-from utils.parsers import (
-    download_subtitles,
-)
+from utils.parsers import download_subtitles
+from utils.queries import query_json_data
+from utils.readers import read_postgres
 from utils.routines import build_json_with_links
 from utils.writers import merge_quotes, write_postgres
 
 warnings.filterwarnings('ignore')
 # setup logger
-logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format=FORMAT,
-    level=logging.INFO,
-    handlers=[logging.StreamHandler()]
-)
+# logger = logging.getLogger(__name__)
+# logging.basicConfig(
+#     format=FORMAT,
+#     level=logging.INFO,
+#     handlers=[logging.StreamHandler()]
+# )
 
 load_dotenv()
 host = os.getenv("HOST")
@@ -38,6 +38,28 @@ port = os.getenv("PORT")
 database = os.getenv("DATABASE")
 user = os.getenv("USER")
 password = os.getenv("PASSWORD")
+
+
+@task
+def get_already_downloaded_animes(
+    query: str,
+) -> dict[str, bool]:
+    con = postgres_connector(
+        user=user,
+        password=password,
+        host=host,
+        database=database,
+        port=port
+    )
+    df = read_postgres(
+        con=con,
+        query=query
+    )
+    mapping = df.to_dict(orient="list")
+    names = mapping["anime_name"]
+    is_complete = mapping["completed"]
+
+    return {name: status for name, status in zip(names, is_complete)}
 
 
 @task
@@ -74,8 +96,10 @@ def get_links_from_web(
     page_limit: int = 1,
     desired_subs: str = DESIRED_SUBS,
     filter_links: Optional[list[str]] = None,
+    already_collected_animes: dict[str, bool] = dict(),
     save_links_on_db: bool = True
 ) -> None:
+    logger = get_run_logger()
     start = time.time()
     for page in range(1, page_count + 1):
         data = build_json_with_links(
@@ -83,6 +107,7 @@ def get_links_from_web(
             limit_per_page=page_limit,
             desired_subs=desired_subs,
             filter_links=filter_links,
+            already_collected_animes=already_collected_animes
         )
         with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
@@ -111,6 +136,7 @@ def get_subtitles_from_web(
     download_amount: int = 1,
     schema: str = "raw_quotes",
 ) -> None:
+    logger = get_run_logger()
     for idx, file in enumerate(os.listdir("examples")):
         if idx == download_amount:
             logger.info(
@@ -181,12 +207,17 @@ def flow(
     filter_links: Optional[list[str]] = None,
     schema: str = "raw_quotes"
 ) -> None:
+    anime_status_map = get_already_downloaded_animes(
+        query=query_json_data
+    )
+
     if get_links:
         get_links_from_web(
             page_count=page_count,
             page_limit=page_limit,
             desired_subs=DESIRED_SUBS,
             filter_links=filter_links,
+            already_collected_animes=anime_status_map,
             save_links_on_db=True
         )
 
@@ -200,7 +231,7 @@ flow(
     get_links=True,
     download_limit=1,
     page_count=1,
-    page_limit=3,
+    page_limit=2,
     filter_links=[],
     schema="raw_quotes"
 )

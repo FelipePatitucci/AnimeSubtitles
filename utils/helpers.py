@@ -9,6 +9,8 @@ import pandas as pd
 from typing import Any, Dict, List, Optional, Tuple, Union
 # from ass.line import Dialogue
 from bs4.element import Tag
+from prefect import get_run_logger
+
 from .constants import (
     SEQUENCE_REGEX,
     QUALITY_REGEX,
@@ -98,9 +100,12 @@ def sort_options_by_priority(provider_names: List[str]) -> List[str]:
 
 
 def filter_links_from_provider(
-        entries: List[Dict[str, str]], batch_provider: str, ep_count: int) \
-        -> List[Dict[str, str]]:
+    entries: List[Dict[str, str]],
+    batch_provider: str,
+    ep_count: int
+) -> List[Dict[str, str]]:
     # maybe return length of the list
+    logger = get_run_logger()
     already_selected = []
     filtered_entries = []
     for entry in entries:

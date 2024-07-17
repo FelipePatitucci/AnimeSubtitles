@@ -8,3 +8,10 @@ create table if not exists %s.%s (
 	END_TIME TIME(3)
 );
 """
+
+query_json_data = """
+SELECT
+	anime_name,
+    completed
+FROM raw_quotes.v_json_info;
+"""

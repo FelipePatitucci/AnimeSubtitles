@@ -34,5 +34,6 @@ def postgres_connector(
             connection.set_isolation_level(0)
     except Exception as error:
         print("Error while connecting to PostgreSQL", error)
+        raise
 
     return connection

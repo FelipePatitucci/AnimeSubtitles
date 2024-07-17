@@ -5,8 +5,11 @@ import os
 import requests
 from time import sleep
 from typing import Any, Dict, List, Optional, Tuple, Union
+
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+from prefect import get_run_logger, task
+
 from .constants import (
     MAIN_URL,
     REMOVE_REPACK,
@@ -38,19 +41,23 @@ logging.basicConfig(
 
 
 def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
+    logger = get_run_logger()
     url = MAIN_URL + f"?page={page}"
     finished_entries = []
+
     try:
         response = requests.get(url=url, timeout=60)
         data = response.text
         soup = BeautifulSoup(data, 'html.parser')
+
         for div in soup.find_all('div', class_='home_list_entry'):
             if '(finished)' in div.text or '(movie)' in div.text:
                 finished_entries.append(div)
+
         logger.info(f"Processed page {page} request.")
 
     except TimeoutError:
-        logger.error(f"Timeout when during page {page} request.")
+        logger.error(f"Timeout during page {page} request.")
 
     except Exception as e:
         logger.error(str(e))
@@ -58,8 +65,11 @@ def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
     return finished_entries
 
 
-def get_batch_options_and_episode_count(title: str, link: str) \
-        -> Tuple[Dict[str, str], List[str], int, int]:
+def get_batch_options_and_episode_count(
+    title: str,
+    link: str
+) -> Tuple[Dict[str, str], List[str], int, int]:
+    logger = get_run_logger()
     batch_options = {}
     url = link + REMOVE_REPACK
     res = requests.get(url, timeout=60)
@@ -70,6 +80,7 @@ def get_batch_options_and_episode_count(title: str, link: str) \
     # the entry may not have any options, so we have to skip it
     current_choice = 0
     fonts_set = set()
+
     for candidate in parent_divs:
         # skip all batches
         is_batch = candidate.find("div", class_="links").find("em")
@@ -115,7 +126,11 @@ def get_batch_options_and_episode_count(title: str, link: str) \
     return batch_options, list(fonts_set), int(episode_count), mal_id
 
 
-def get_subtitle_links(link: str, desired_subs: str = DESIRED_SUBS) -> Tuple[str, str]:
+def get_subtitle_links(
+    link: str,
+    desired_subs: str = DESIRED_SUBS
+) -> Tuple[str, str]:
+    logger = get_run_logger()
     sub_info, sub_link = "", ""
     wait, wait_time = False, DEFAULT_WAIT_TIME
     max_attempts = DEFAULT_ATTEMPTS
@@ -191,8 +206,11 @@ def parse_subtitles(subs: Optional[Tag]) -> Dict[str, str]:
     return subs_links
 
 
-def get_all_links_from_provider(provider: str, page: str, link: str) \
-        -> Tuple[List[Dict[str, str]], bool]:
+def get_all_links_from_provider(
+    provider: str,
+    page: str,
+    link: str
+) -> Tuple[List[Dict[str, str]], bool]:
     episode_links = []
     url = link + REMOVE_REPACK + f"&page={page}"
     res = requests.get(url, timeout=60)
@@ -231,6 +249,7 @@ def get_all_subtitles_info(
         provider_name: str,
         desired_subs: str = DESIRED_SUBS
 ) -> List[Dict[str, str]]:
+    logger = get_run_logger()
     final_object = []
     already_obtained_links = set()
     already_obtained_episodes = set()

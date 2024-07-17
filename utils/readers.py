@@ -1,6 +1,9 @@
-import requests
-import logging
 from typing import Any, Callable, Optional, Tuple
+
+import logging
+import pandas as pd
+import requests
+
 from .constants import (
     DEFAULT_ATTEMPTS,
     DEFAULT_TIMEOUT,
@@ -62,3 +65,21 @@ class AnimeTosho:
             data = process_fn(data)
 
         return data, code
+
+
+def read_postgres(
+    con,
+    query: str,
+    cleanup: bool = True
+) -> pd.DataFrame:
+    try:
+        df = pd.read_sql(sql=query, con=con)
+    except Exception as err:
+        logger.error(f"Error executing query: {query}.\n", err)
+        raise
+
+    finally:
+        if con and cleanup:
+            con.close()
+
+    return df
