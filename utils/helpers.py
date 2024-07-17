@@ -211,6 +211,7 @@ def create_folders_for_anime(
     anime_name: str,
     # logs: Literal["minimal", "debug"] = "minimal"
 ) -> bool:
+    logger = get_run_logger()
     logger.info("Trying to create necessary folders...")
     completed = True
 
@@ -234,11 +235,14 @@ def create_folders_for_anime(
 
 
 def generate_ass_files(filter_anime: str = "") -> List[str]:
+    logger = get_run_logger()
     created = []
     filter_anime = remove_special_characters(
         filter_anime).replace(" ", "_").lower()
     animes = os.listdir('data')
 
+    # this is kinda obsolete, very hard to maintain
+    # if you want to filter anime, it´s better to filter it´s link
     if filter_anime:
         logger.info(f"Searching only for anime {filter_anime}.")
 
@@ -352,6 +356,7 @@ def build_df_from_ass_files(
     file_path: str,
     anime_name: str
 ) -> Optional[pd.DataFrame]:
+    logger = get_run_logger()
     data = process_data_input(file_path)
 
     # nothing to be done

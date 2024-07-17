@@ -3,6 +3,7 @@ from typing import Any, Literal, Optional
 
 import pandas as pd
 import psycopg2.extras
+from prefect import get_run_logger
 
 from .constants import FORMAT
 from .queries import query_create_table
@@ -85,6 +86,7 @@ def write_postgres(
     clear_songs: bool = True,
     cleanup: bool = True
 ) -> None:
+    logger = get_run_logger()
     # empty df
     if df.empty:
         logger.info("Nothing to be done, empty dataframe.")

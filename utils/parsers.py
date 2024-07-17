@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
-from prefect import get_run_logger, task
+from prefect import get_run_logger
 
 from .constants import (
     MAIN_URL,
@@ -314,15 +314,18 @@ def get_all_subtitles_info(
 
 
 def get_subtitle_file(link: str) -> Optional[requests.Response]:
-    try:
-        response = requests.get(link, timeout=10)
-    # TODO: make this better (specify problem)
-    except Exception as e:
-        logger.warning(
-            f"Error when downloading file from link: {link}"
-        )
-        logger.debug(e)
-        response = None
+    response = None
+    for attempt in range(DEFAULT_ATTEMPTS):
+        try:
+            response = requests.get(link, timeout=10)
+            break
+        # TODO: make this better (specify problem)
+        except Exception as e:
+            logger.warning(
+                f"Error when downloading file from link: {link}. (attempt {attempt+1})"
+            )
+            logger.debug(e)
+            attempt += 1
 
     return response
 
@@ -355,6 +358,7 @@ def download_subtitles(
     file_path: Union[str, Dict[str, List[Dict[str, str]]]],
     filter_anime: str = "",
 ) -> None:
+    logger = get_run_logger()
     # verify data
     data = process_data_input(file_path)
 
