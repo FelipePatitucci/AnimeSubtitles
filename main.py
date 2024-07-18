@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from prefect import flow, task, get_run_logger
 
 from utils.connectors import postgres_connector
-from utils.constants import DESIRED_SUBS
+from utils.constants import DESIRED_SUBS, MAX_LINES_PER_EPISODE
 from utils.helpers import (
     build_df_from_ass_files,
     generate_ass_files,
@@ -135,6 +135,7 @@ def get_links_from_web(
 def get_subtitles_from_web(
     download_amount: int = 1,
     schema: str = "raw_quotes",
+    max_lines_per_episode: int = MAX_LINES_PER_EPISODE
 ) -> None:
     logger = get_run_logger()
     for idx, file in enumerate(os.listdir("examples")):
@@ -170,7 +171,8 @@ def get_subtitles_from_web(
                 logger.info(f"---------- Processing anime: {anime} ----------")
                 df = build_df_from_ass_files(
                     file_path=file_path,
-                    anime_name=anime
+                    anime_name=anime,
+                    max_lines_per_episode=max_lines_per_episode
                 )
 
                 if df is None:
@@ -194,6 +196,7 @@ def get_subtitles_from_web(
         except Exception as err:
             logger.error(err)
             raise
+
         finally:
             con.close()
 
@@ -223,15 +226,16 @@ def flow(
 
     get_subtitles_from_web(
         download_amount=download_limit,
-        schema=schema
+        schema=schema,
+        max_lines_per_episode=MAX_LINES_PER_EPISODE
     )
 
 
 flow(
-    get_links=False,
-    download_limit=3,
-    page_count=3,
-    page_limit=99,
+    get_links=True,
+    download_limit=1,
+    page_count=1,
+    page_limit=10,
     filter_links=[],
     schema="raw_quotes"
 )

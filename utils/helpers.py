@@ -337,13 +337,17 @@ def process_episode_data(
                 continue
 
             # we will probably not have the character names
-            if not event.name:
+            if not event.name or event.name == "NTP":
                 event.name = "Unknown"
                 no_character_name += 1
 
             # save every line with whoever said the line
             # also remove brackets and change \N to space
             cleaned_text = prepare_text_for_insertion(event.text)
+
+            if not cleaned_text:
+                # empty string is useless
+                continue
 
             data.append(
                 [mal_id, episode, event.name, cleaned_text, event.start, event.end]
@@ -354,7 +358,8 @@ def process_episode_data(
 
 def build_df_from_ass_files(
     file_path: str,
-    anime_name: str
+    anime_name: str,
+    max_lines_per_episode: int
 ) -> Optional[pd.DataFrame]:
     logger = get_run_logger()
     data = process_data_input(file_path)
@@ -389,6 +394,14 @@ def build_df_from_ass_files(
         except Exception as err:
             logger.error(f'Error reading {path}.')
             raise err
+
+    threshold = len(episodes) * max_lines_per_episode
+    if len(table) > threshold:
+        logger.warning(
+            f"Anime {anime_name} have exceeded the threshold for insertion. "
+            f"It has {len(table)} rows, with the limit being {threshold}."
+        )
+        return
 
     df = pd.DataFrame(
         table, columns=['mal_id', 'episode', 'name', 'quote', 'start_time', 'end_time'])

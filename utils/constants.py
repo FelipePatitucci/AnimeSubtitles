@@ -30,3 +30,4 @@ RESERVED_CHARACTERS_REMAP = {
     ":": "_" * 2,
     "!": "_" * 3
 }
+MAX_LINES_PER_EPISODE = 600
