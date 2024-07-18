@@ -158,6 +158,10 @@ def build_json_with_links(
         page = 1
         title_key = remove_special_characters(title).replace(" ", "_").lower()
 
+        if title_key[0].isdigit():
+            # table names cannot start with digits
+            title_key = "_" + title_key
+
         data[title_key] = {
             "data": [],
             "metadata": {

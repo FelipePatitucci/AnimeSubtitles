@@ -228,10 +228,10 @@ def flow(
 
 
 flow(
-    get_links=True,
-    download_limit=1,
-    page_count=1,
-    page_limit=2,
+    get_links=False,
+    download_limit=3,
+    page_count=3,
+    page_limit=99,
     filter_links=[],
     schema="raw_quotes"
 )

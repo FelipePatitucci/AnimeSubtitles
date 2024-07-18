@@ -13,5 +13,6 @@ query_json_data = """
 SELECT
 	anime_name,
     completed
-FROM raw_quotes.v_json_info;
+FROM raw_quotes.v_json_info
+ORDER BY completed ASC, ep_amount ASC;
 """
