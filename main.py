@@ -92,6 +92,7 @@ def export_links_to_db(
 
 @task
 def get_links_from_web(
+    page_start: int = 1,
     page_count: int = 1,
     page_limit: int = 1,
     desired_subs: str = DESIRED_SUBS,
@@ -101,7 +102,7 @@ def get_links_from_web(
 ) -> None:
     logger = get_run_logger()
     start = time.time()
-    for page in range(1, page_count + 1):
+    for page in range(page_start, page_start + page_count):
         data = build_json_with_links(
             page=page,
             limit_per_page=page_limit,
@@ -205,6 +206,7 @@ def get_subtitles_from_web(
 def flow(
     get_links: bool = True,
     download_limit: int = 1,
+    page_start: int = 1,
     page_count: int = 1,
     page_limit: int = 1,
     filter_links: Optional[list[str]] = None,
@@ -216,6 +218,7 @@ def flow(
 
     if get_links:
         get_links_from_web(
+            page_start=page_start,
             page_count=page_count,
             page_limit=page_limit,
             desired_subs=DESIRED_SUBS,
@@ -232,10 +235,11 @@ def flow(
 
 
 flow(
-    get_links=True,
+    get_links=False,
     download_limit=1,
+    page_start=1,
     page_count=1,
-    page_limit=10,
+    page_limit=50,
     filter_links=[],
     schema="raw_quotes"
 )

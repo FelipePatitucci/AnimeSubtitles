@@ -2,8 +2,9 @@
 import json
 # from bs4 import BeautifulSoup
 # import requests
+from datetime import datetime
 import os
-# import pandas as pd
+import pandas as pd
 import ass
 import requests
 from bs4 import BeautifulSoup
@@ -67,6 +68,6 @@ st = "\"Oshi no- Ko-\""
 #         print(prepare_text_for_insertion(event.text))
 #         if i > 5:
 #             break
-with open("examples/page_1.json", "r+", encoding="utf-8") as f:
-    teste = json.load(f)
-    print(list(teste.keys()))
+# with open("examples/page_1.json", "r+", encoding="utf-8") as f:
+#     teste = json.load(f)
+#     print(list(teste.keys()))

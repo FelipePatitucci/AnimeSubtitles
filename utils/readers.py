@@ -1,70 +1,75 @@
-from typing import Any, Callable, Optional, Tuple
+from time import sleep
+from typing import Any, Callable, Optional
 
-import logging
+# import logging
 import pandas as pd
 import requests
+from prefect import get_run_logger
 
 from .constants import (
     DEFAULT_ATTEMPTS,
     DEFAULT_TIMEOUT,
     DEFAULT_WAIT_TIME,
-    FORMAT,
-    MAIN_URL,
+    # FORMAT,
 )
-logger = logging.getLogger(__name__)
-level = logging.INFO
-logging.basicConfig(
-    format=FORMAT,
-    level=level,
-    handlers=[logging.StreamHandler()])
+# logger = logging.getLogger(__name__)
+# level = logging.INFO
+# logging.basicConfig(
+#     format=FORMAT,
+#     level=level,
+#     handlers=[logging.StreamHandler()])
 
 
-class AnimeTosho:
+def read_url(
+    url: str,
+    max_retries: int = DEFAULT_ATTEMPTS,
+    timeout: int = DEFAULT_TIMEOUT,
+    wait_time: int = DEFAULT_WAIT_TIME,
+    process_fn: Optional[Callable[[requests.Response], Any]] = None
+) -> requests.Response | Any:
+    logger = get_run_logger()
+    attempts = 0
+    completed = False
+    wait = False
 
-    def __init__(
-        self,
-        url: str = MAIN_URL,
-        attempts: int = DEFAULT_ATTEMPTS,
-        timeout: int = DEFAULT_TIMEOUT,
-        wait_time: int = DEFAULT_WAIT_TIME,
-        silent: bool = True
-    ) -> None:
-        self.url = url
-        self.attempts = attempts
-        self.timeout = timeout
-        self.wait_time = wait_time
-        self.silent = silent
-        pass
-
-    def get(
-        self,
-        page: int = 0,
-        process_fn: Optional[Callable] = None,
-        silent: bool = True
-    ) -> Tuple[Any, int]:
-        data = ""
-        code = ""
-        silent = silent and self.silent
-
-        if page:
-            url = self.url + f"?page={page}"
-
+    for attempts in range(max_retries):
+        if wait:
+            sleep(wait_time)
         try:
-            res = requests.get(url=url, timeout=60)
-            data = res.text
-            code = res.status_code
-            logger.info(f"Processed page {page} request.")
+            res = requests.get(url=url, timeout=timeout)
+            completed = res.ok
+            if completed:
+                break
+
+            # lets try again but now waiting a little
+            wait = True
+            attempts += 1
+            wait_time *= attempts
+            logger.info(
+                f"Received '{res.reason}' for link {url}. Trying again after {wait_time}s."
+            )
 
         except TimeoutError:
-            logger.error(f"Timeout when during page {page} request.")
+            logger.error(
+                f"Timeout during url {url} request. (attempt: {attempts + 1})"
+            )
 
         except Exception as e:
-            logger.error(str(e))
+            logger.debug(str(e))
+            logger.warning(
+                f"Failed to request subtitle data from link {url}. (attempt: {attempts + 1})"
+            )
 
-        if process_fn is not None and data:
-            data = process_fn(data)
+    if not completed:
+        logger.warning(
+            f"Failed to get response from url {url} after {max_retries} attempts."
+        )
+        # res = ""
 
-        return data, code
+    elif process_fn is not None:
+        res = process_fn(res)
+
+    return res
 
 
 def read_postgres(
@@ -72,8 +77,11 @@ def read_postgres(
     query: str,
     cleanup: bool = True
 ) -> pd.DataFrame:
+    logger = get_run_logger()
+
     try:
         df = pd.read_sql(sql=query, con=con)
+
     except Exception as err:
         logger.error(f"Error executing query: {query}.\n", err)
         raise
