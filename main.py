@@ -43,7 +43,7 @@ password = os.getenv("PASSWORD")
 @task
 def get_already_downloaded_animes(
     query: str,
-) -> dict[str, bool]:
+) -> dict[str, dict[str, Any]]:
     con = postgres_connector(
         user=user,
         password=password,
@@ -58,8 +58,17 @@ def get_already_downloaded_animes(
     mapping = df.to_dict(orient="list")
     mal_ids = mapping["mal_id"]
     is_complete = mapping["completed"]
+    ep_amount = mapping["ep_amount"]
 
-    return {mal_id: status for mal_id, status in zip(mal_ids, is_complete)}
+    result = {
+        mal_id: {
+            "completed": status,
+            "ep_amount": ep_count
+        }
+        for mal_id, status, ep_count in zip(mal_ids, is_complete, ep_amount)
+    }
+
+    return result
 
 
 @task
@@ -71,6 +80,7 @@ def export_links_to_db(
 
     normalized_entries = [
         json.dumps({"name": key, "info": value}) for key, value in data.items()
+        if value["data"]
     ]
     json_df = pd.DataFrame(
         data={
@@ -97,7 +107,7 @@ def get_links_from_web(
     page_limit: int = 1,
     desired_subs: str = DESIRED_SUBS,
     filter_links: Optional[list[str]] = None,
-    already_collected_animes: dict[str, bool] = dict(),
+    already_collected_animes: dict[str, dict[str, Any]] = dict(),
     save_links_on_db: bool = True
 ) -> None:
     logger = get_run_logger()
@@ -240,6 +250,6 @@ flow(
     page_start=1,
     page_count=1,
     page_limit=99,
-    filter_links=["https://animetosho.org/series/sousou-no-frieren.17617"],
+    filter_links=[],
     schema="raw_quotes"
 )

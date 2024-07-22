@@ -34,7 +34,7 @@ def build_json_with_links(
     limit_per_page: int = 1,
     filter_links: list[str] = None,
     desired_subs: str = DESIRED_SUBS,
-    already_collected_animes: dict[str, bool] = dict()
+    already_collected_animes: dict[str, dict[str, Any]] = dict()
 ) -> Dict[str, Any]:
     """
     Constructs a dictionary containing anime titles and corresponding lists
@@ -110,7 +110,7 @@ def build_json_with_links(
         logger.debug(f"Batch Providers: {providers_info}")
 
         # check if we already have this full entry
-        if already_collected_animes.get(mal_id, False):
+        if already_collected_animes.get(mal_id, {}).get("completed", False):
             logger.info(
                 f"Anime [{title}] with id of {mal_id} already completed in database. Skipping..."
             )
@@ -198,5 +198,19 @@ def build_json_with_links(
             anime_title, anime_info, provider_selected, desired_subs
         )
         data[anime_title]["data"] = all_subs_info
+
+        # if this is a new entry, we will write it regardless
+        # however, if this is duplicate, we only want to write back to db if it has more eps
+        current_id = data[anime_title]["metadata"]["mal_id"]
+        eps_in_db = already_collected_animes.get(
+            current_id, {}
+        ).get("ep_amount", 0)
+
+        if eps_in_db >= len(all_subs_info):
+            logger.info(
+                f"This anime curretly has {eps_in_db} eps in db. This iteration "
+                f"would provide {len(all_subs_info)} eps, so it will not be inserted."
+            )
+            data[anime_title]["data"] = []
 
     return data
