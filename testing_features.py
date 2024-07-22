@@ -8,6 +8,9 @@ import pandas as pd
 import ass
 import requests
 from bs4 import BeautifulSoup
+from prefect import flow, task
+from utils.readers import read_url
+
 # from sqlalchemy import create_engine
 # from sqlite3 import connect
 # from utils.helpers import clean_ass_text
@@ -71,3 +74,16 @@ st = "\"Oshi no- Ko-\""
 # with open("examples/page_1.json", "r+", encoding="utf-8") as f:
 #     teste = json.load(f)
 #     print(list(teste.keys()))
+
+
+# @flow
+# def teste():
+#     teste = read_url(
+#         url="https://animetosho.org/series/sousou-no-frieren.17617"
+#     )
+#     soup = BeautifulSoup(teste.text, 'html.parser')
+#     title_name_div = soup.select_one("body > div > div > div > div > h2")
+#     return title_name_div.text
+
+
+# teste()

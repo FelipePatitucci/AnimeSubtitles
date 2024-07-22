@@ -91,12 +91,26 @@ def convert_title_to_size(title: str) -> float:
     return size_in_gb
 
 
-def sort_options_by_priority(provider_names: List[str]) -> List[str]:
-    provider_names += PREFERENCE_RAWS
-    for pref in PREFERENCE_RAWS:
-        provider_names.remove(pref)
-    provider_names = provider_names[::-1]
-    return provider_names
+def sort_options_by_priority(
+    provider_names: dict[str, dict[str, Any]],
+    preference_raw: str = PREFERENCE_RAWS
+) -> dict[str, dict[str, Any]]:
+    # first, we check if preferred provider is available and get it
+    preferred_prov = provider_names.pop(preference_raw, "")
+
+    # sort by amount of links that each provider has, highest to lowest
+    sorted_by_amount = sorted(
+        provider_names.items(),
+        key=lambda x: x[1]["amount"],
+        reverse=True
+    )
+
+    # transform to dict and include priority first
+    result = {preference_raw: preferred_prov} if preferred_prov else dict()
+    result.update({key: value for key, value in sorted_by_amount})
+    print(result)
+
+    return result
 
 
 def filter_links_from_provider(
@@ -397,7 +411,7 @@ def build_df_from_ass_files(
 
     ep_count = len(episodes)
     threshold = ep_count * max_lines_per_episode
-    if len(table) > threshold and ep_count > 1:
+    if len(table) > threshold and anime_info["metadata"]["episode_count"] > 1:
         # probably not a movie, and possibly with lots of "useless" lines.
         # may require manual checking for some cases.
         # the max_lines_per_episode defined in constants file is based of

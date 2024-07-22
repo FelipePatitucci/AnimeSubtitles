@@ -11,7 +11,7 @@ create table if not exists %s.%s (
 
 query_json_data = """
 SELECT
-	anime_name,
+	mal_id,
     completed
 FROM raw_quotes.v_json_info
 ORDER BY completed ASC, ep_amount ASC;

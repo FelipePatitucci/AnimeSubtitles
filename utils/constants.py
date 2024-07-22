@@ -19,7 +19,7 @@ SEASON_REGEX = r'S([0-9]{2})E'
 BRACKETS_REGEX = r'\{[^{}]*\}|\([^\[\]]*\)'
 
 # PARSER configs
-PREFERENCE_RAWS = ["[Erai-raws]", "[SubsPlease]"]
+PREFERENCE_RAWS = "[SubsPlease]"  # ["[Erai-raws]", "[SubsPlease]"]
 DESIRED_SUBS = "eng"
 MEMBER_CUT = 20000
 PATH_ID_MEMBER_MAP = "misc/mal_id_member_count.json"

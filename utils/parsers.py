@@ -58,7 +58,7 @@ def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
 def get_batch_options_and_episode_count(
     title: str,
     link: str
-) -> Tuple[Dict[str, str], List[str], int, int]:
+) -> tuple[dict[str, dict[str, Any]], int, int]:
     logger = get_run_logger()
     batch_options = {}
     url = link + REMOVE_REPACK
@@ -68,9 +68,6 @@ def get_batch_options_and_episode_count(
 
     # get all candidates
     parent_divs = soup.find_all("div", class_="home_list_entry")
-    # the entry may not have any options, so we have to skip it
-    current_choice = 0
-    fonts_set = set()
 
     for candidate in parent_divs:
         # skip all batches
@@ -84,21 +81,23 @@ def get_batch_options_and_episode_count(
         if size_in_gb > 16.0:
             continue
 
-        # TODO: Maybe get the amount of links from provider on the page
         batch_obj = candidate.find("div", class_="link").find("a")
         provider = get_provider(batch_obj.text)
-        if not provider or provider in fonts_set:
-            # just one example per provider is enough
+        if not provider:
             continue
 
-        batch_options[provider] = batch_obj.get("href")
-        fonts_set.add(provider)
-        current_choice += 1
+        if provider in batch_options:
+            batch_options[provider]["amount"] += 1
+        else:
+            batch_options[provider] = {
+                "amount": 1,
+                "trial_link": batch_obj.get("href")
+            }
 
     # not a single option below 16gb for this anime
-    if not current_choice:
+    if not batch_options:
         logger.warning(
-            f"No available file below 16GB for anime {title}."
+            f"No available non-batch file below 16GB for anime {title}."
         )
 
     # get episode count
@@ -108,14 +107,16 @@ def get_batch_options_and_episode_count(
             " episode(s)")[0].split(", ")[-1]
         logger.info(f"Got episode count of {episode_count}.")
 
-    except Exception:
+    except Exception as err:
+        logger.warning(f"Failed to get episode count for {title}.")
+        logger.debug(err)
         episode_count = 0
 
     # get MAL id
     infos_div = soup.select("table > tbody > tr > td > div", limit=2)
     mal_id = get_mal_id(div=infos_div, title=title)
 
-    return batch_options, list(fonts_set), int(episode_count), mal_id
+    return batch_options, int(episode_count), mal_id
 
 
 def get_subtitle_links(
@@ -411,3 +412,9 @@ def download_subtitles(
             )
 
     return
+
+
+def get_title_name(res: requests.Response) -> str:
+    soup = BeautifulSoup(res.text, 'html.parser')
+    title_name_div = soup.select_one("body > div > div > div > div > h2")
+    return title_name_div.text

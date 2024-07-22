@@ -17,7 +17,9 @@ from utils.parsers import (
     get_animes_finished_from_page,
     get_batch_options_and_episode_count,
     get_subtitle_links,
+    get_title_name,
 )
+from utils.readers import read_url
 
 # logger = logging.getLogger(__name__)
 # level = logging.INFO
@@ -74,14 +76,21 @@ def build_json_with_links(
         logger.error(f"Bad response from page {page}. Skipping...")
         return dict()
 
+    titles, links = extract_titles_and_anime_links(
+        animes=animes, filter_links=filter_links
+    )
+
+    # while this is kinda bad architecture, it's the simplest way without rewriting much code
     if filter_links:
         logger.info(
             f"Processing only links: {'; '.join(filter_links)}."
         )
-
-    titles, links = extract_titles_and_anime_links(
-        animes=animes, filter_links=filter_links
-    )
+        links = filter_links
+        # we have to make a call here to get the anime title
+        # this will be used for the table name
+        titles = [
+            read_url(url=link, process_fn=get_title_name) for link in links
+        ]
 
     if not titles or not links:
         logger.info(f"Nothing to process on page {page}.")
@@ -96,16 +105,16 @@ def build_json_with_links(
         logger.info(f"Processing link: {link}")
         logger.info(f"Processing anime: {title}")
 
+        providers_info, episode_count, mal_id = \
+            get_batch_options_and_episode_count(title=title, link=link)
+        logger.debug(f"Batch Providers: {providers_info}")
+
         # check if we already have this full entry
-        if already_collected_animes.get(title, False):
+        if already_collected_animes.get(mal_id, False):
             logger.info(
-                f"Anime [{title}] already completed in database. Skipping..."
+                f"Anime [{title}] with id of {mal_id} already completed in database. Skipping..."
             )
             continue
-
-        providers_info, provider_names, episode_count, mal_id = \
-            get_batch_options_and_episode_count(title=title, link=link)
-        logger.debug(f"Batch Providers: {provider_names}")
 
         if episode_count == 0 or mal_id == 0:
             # we will not be able to sort our data appropriatelly
@@ -114,7 +123,7 @@ def build_json_with_links(
             )
             continue
 
-        if len(provider_names) == 0:
+        if len(providers_info) == 0:
             # nothing we can do
             logger.warning(
                 f"No available provider for anime {title}. Skipping..."
@@ -129,19 +138,19 @@ def build_json_with_links(
             continue
 
         provider_selected = ""
-        # sort provider_names by priority
-        provider_names = sort_options_by_priority(provider_names)
+        # sort provider_names by priority (preference, then amount of links)
+        providers_info = sort_options_by_priority(providers_info)
 
         # search for a functional provider
-        for provider_option in provider_names:
+        for provider_name, info in providers_info.items():
             # link to test provider
-            trial_link = providers_info[provider_option]
+            trial_link = info["trial_link"]
             sub_info, sub_link = get_subtitle_links(
                 trial_link, desired_subs
             )
 
             if sub_info and sub_link:
-                provider_selected = provider_option
+                provider_selected = provider_name
                 logger.info(
                     f"Selected {provider_selected} provider for anime {title}.")
                 break
@@ -174,13 +183,15 @@ def build_json_with_links(
         while processing:
             logger.info(f"Parsing page {page}")
             page_links, has_entries = get_all_links_from_provider(
-                provider_selected, page, link)
+                provider_selected, page, link
+            )
             data[title_key]["data"] += page_links
             processing = has_entries
             page += 1
 
         data[title_key]["data"] = filter_links_from_provider(
-            data[title_key]["data"], provider_selected, episode_count)
+            data[title_key]["data"], provider_selected, episode_count
+        )
 
     for anime_title, anime_info in data.items():
         all_subs_info = get_all_subtitles_info(

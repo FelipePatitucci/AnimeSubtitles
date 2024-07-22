@@ -56,10 +56,10 @@ def get_already_downloaded_animes(
         query=query
     )
     mapping = df.to_dict(orient="list")
-    names = mapping["anime_name"]
+    mal_ids = mapping["mal_id"]
     is_complete = mapping["completed"]
 
-    return {name: status for name, status in zip(names, is_complete)}
+    return {mal_id: status for mal_id, status in zip(mal_ids, is_complete)}
 
 
 @task
@@ -235,11 +235,11 @@ def flow(
 
 
 flow(
-    get_links=False,
+    get_links=True,
     download_limit=1,
     page_start=1,
     page_count=1,
-    page_limit=50,
-    filter_links=[],
+    page_limit=99,
+    filter_links=["https://animetosho.org/series/sousou-no-frieren.17617"],
     schema="raw_quotes"
 )
