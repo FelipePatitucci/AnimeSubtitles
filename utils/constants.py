@@ -17,6 +17,7 @@ SEQUENCE_REGEX = r'\[([A-Z0-9]{8})\]'  # matches torrent sequence
 EPISODE_REGEX = r'[0-9]{2,4}(?=\s)'
 SEASON_REGEX = r'S([0-9]{2})E'
 BRACKETS_REGEX = r'\{[^{}]*\}|\([^\[\]]*\)'
+SPECIAL_CHARS_REGEX = r'[\\\"\'\[\]/(),.;&?~-]'
 
 # PARSER configs
 PREFERENCE_RAWS = "[SubsPlease]"  # ["[Erai-raws]", "[SubsPlease]"]

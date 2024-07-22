@@ -18,6 +18,7 @@ from .constants import (
     SEASON_REGEX,
     REMOVE_DELIMITERS_REGEX,
     BRACKETS_REGEX,
+    SPECIAL_CHARS_REGEX,
     PREFERENCE_RAWS,
     DESIRED_SUBS,
     FORMAT,
@@ -546,7 +547,7 @@ def find_season(input_string: str, provider: str) -> str:
 
 
 def remove_special_characters(input_string: str) -> str:
-    pattern = r'[\\\"\'\[\]/(),.;?~-]'
+    pattern = SPECIAL_CHARS_REGEX
     clean_text = re.sub(pattern, '', input_string)
 
     # some animes use ! and : to distinguish between seasons
