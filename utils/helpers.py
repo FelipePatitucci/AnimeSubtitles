@@ -94,10 +94,10 @@ def convert_title_to_size(title: str) -> float:
 
 def sort_options_by_priority(
     provider_names: dict[str, dict[str, Any]],
-    preference_raw: str = PREFERENCE_RAWS
+    preference_raws: list[str] = PREFERENCE_RAWS
 ) -> dict[str, dict[str, Any]]:
     # first, we check if preferred provider is available and get it
-    preferred_prov = provider_names.pop(preference_raw, "")
+    preferred_provs = [provider_names.pop(raw, "") for raw in preference_raws]
 
     # sort by amount of links that each provider has, highest to lowest
     sorted_by_amount = sorted(
@@ -107,7 +107,10 @@ def sort_options_by_priority(
     )
 
     # transform to dict and include priority first
-    result = {preference_raw: preferred_prov} if preferred_prov else dict()
+    result = {
+        prov: info for prov, info in zip(preference_raws, preferred_provs)
+        if info
+    }
     result.update({key: value for key, value in sorted_by_amount})
     print(result)
 
@@ -123,14 +126,17 @@ def filter_links_from_provider(
     logger = get_run_logger()
     already_selected = []
     filtered_entries = []
+
     for entry in entries:
         title = entry["link_title"]
         quality_match = re.search(QUALITY_REGEX, title)
         sequence_match = re.search(SEQUENCE_REGEX, title)
         quality = quality_match.group(1) if quality_match else ""
         sequence = sequence_match.group(1) if sequence_match else ""
+
         cleaned_title = clean_title_string(
-            title, quality, sequence, batch_provider)
+            title, quality, sequence, batch_provider
+        )
         if cleaned_title in already_selected:
             continue
 
@@ -141,10 +147,12 @@ def filter_links_from_provider(
         excess = len(filtered_entries) - ep_count
         if excess:
             logger.info(
-                f"Title has {excess} subs compared to number of episodes.")
+                f"Title has {excess} subs compared to number of episodes."
+            )
 
     logger.info(
-        f"{len(filtered_entries)} subs remained after regex filtering.")
+        f"{len(filtered_entries)} subs remained after regex filtering."
+    )
     return filtered_entries
 
 
@@ -504,6 +512,13 @@ def find_episode_number(input_string: str) -> str:
         else:
             number = res[0]
             break
+
+    if not number:
+        # let's try another case (match string like [XY]Z.mkv, XYZ being digits)
+        pattern = r'\s(\d{1,3})\.mkv'
+        match = re.search(pattern, input_string)
+        if match:
+            number = match.group(1)
 
     # should not happen, but just to make sure
     if "." in number:

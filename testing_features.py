@@ -87,3 +87,10 @@ st = "\"Oshi no- Ko-\""
 
 
 # teste()
+
+# pattern = r'(\d{1,3})\.mkv'
+# test_strings = ["[SquareSubs] Bakuten Shoot Beyblade 17.mkv",
+#                 "1.mkv", "12.mkv", "1234.mkv", "abc.mkv"]
+# matches = [re.search(pattern, s).group(1)
+#            for s in test_strings if re.search(pattern, s)]
+# print(matches)
