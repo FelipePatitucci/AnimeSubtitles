@@ -18,7 +18,7 @@ from utils.helpers import (
     generate_ass_files,
 )
 from utils.parsers import download_subtitles
-from utils.queries import query_json_data
+from utils.queries import query_json_data, query_json_from_entry
 from utils.readers import read_postgres
 from utils.routines import build_json_with_links
 from utils.writers import merge_quotes, write_postgres
@@ -213,7 +213,7 @@ def get_subtitles_from_web(
 
 
 @flow
-def flow(
+def populate_db(
     get_links: bool = True,
     download_limit: int = 1,
     page_start: int = 1,
@@ -244,12 +244,43 @@ def flow(
     )
 
 
-flow(
-    get_links=True,
-    download_limit=1,
-    page_start=1,
-    page_count=1,
-    page_limit=99,
-    filter_links=[],
-    schema="raw_quotes"
+@flow
+def download_files_from_anime(
+    mal_id: int
+) -> None:
+    conn = postgres_connector(
+        user=user,
+        password=password,
+        host=host,
+        database=database,
+        port=port
+    )
+    query = query_json_from_entry % mal_id
+    df = read_postgres(con=conn, query=query, cleanup=True)
+    data = df["json_data"].values[0]
+    fixed_dict = {data["name"]: data["info"]}
+    file_path = "examples/id_%s.json" % mal_id
+
+    with open(file=file_path, mode="w+", encoding="utf-8") as fp:
+        json.dump(fixed_dict, fp)
+
+    download_subtitles(
+        file_path=file_path,
+    )
+
+    generate_ass_files()
+
+
+# populate_db(
+#     get_links=False,
+#     download_limit=1,
+#     page_start=1,
+#     page_count=1,
+#     page_limit=99,
+#     filter_links=["https://animetosho.org/series/sousou-no-frieren.17617"],
+#     schema="raw_quotes"
+# )
+
+download_files_from_anime(
+    mal_id=52991
 )

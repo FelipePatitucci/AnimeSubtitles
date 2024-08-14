@@ -275,7 +275,6 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
             logger.info(f"Anime {anime} ignored due to filtering.")
             continue
 
-        logger.info(f'Generating .ass files for anime: {anime}')
         folder_path = 'data/' + anime + '/raw'
         episodes = os.listdir(folder_path)
         success = 0
@@ -288,8 +287,8 @@ def generate_ass_files(filter_anime: str = "") -> List[str]:
                 logger.debug(f"Already generated .ass files for {anime}.")
                 continue
 
+        logger.info(f'Generating .ass files for anime: {anime}')
         for idx, episode in enumerate(episodes):
-
             if ((idx + 1) % 10) == 0 or (idx + 1) == len(episodes):
                 logger.info(f"[Progress|Total]: [{idx+1}|{len(episodes)}]")
 

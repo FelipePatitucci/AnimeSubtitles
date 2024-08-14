@@ -17,3 +17,11 @@ SELECT
 FROM raw_quotes.v_json_info
 ORDER BY completed ASC, ep_amount ASC;
 """
+
+query_json_from_entry = """
+SELECT
+	mal_id,
+	json_data
+FROM raw_quotes.v_json_info
+WHERE mal_id = %s;
+"""

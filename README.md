@@ -6,3 +6,5 @@ Scrapper to get anime subtitles from AnimeTosho website.
 # TODO
 
 - Change tasks implementation to use .map to speedup.
+
+- ADD TESTS!!!
