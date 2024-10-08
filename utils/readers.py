@@ -25,7 +25,7 @@ def read_url(
     max_retries: int = DEFAULT_ATTEMPTS,
     timeout: int = DEFAULT_TIMEOUT,
     wait_time: int = DEFAULT_WAIT_TIME,
-    process_fn: Optional[Callable[[requests.Response], Any]] = None
+    process_fn: Optional[Callable[[requests.Response], Any]] = None,
 ) -> requests.Response | Any:
     logger = get_run_logger()
     attempts = 0
@@ -50,9 +50,7 @@ def read_url(
             )
 
         except TimeoutError:
-            logger.error(
-                f"Timeout during url {url} request. (attempt: {attempts + 1})"
-            )
+            logger.error(f"Timeout during url {url} request. (attempt: {attempts + 1})")
 
         except Exception as e:
             logger.debug(str(e))
@@ -64,7 +62,7 @@ def read_url(
         logger.warning(
             f"Failed to get response from url {url} after {max_retries} attempts."
         )
-        # res = ""
+        res = ""
 
     elif process_fn is not None:
         res = process_fn(res)
@@ -72,11 +70,7 @@ def read_url(
     return res
 
 
-def read_postgres(
-    con,
-    query: str,
-    cleanup: bool = True
-) -> pd.DataFrame:
+def read_postgres(con, query: str, cleanup: bool = True) -> pd.DataFrame:
     logger = get_run_logger()
 
     try:

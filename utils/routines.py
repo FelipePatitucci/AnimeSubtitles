@@ -34,7 +34,7 @@ def build_json_with_links(
     limit_per_page: int = 1,
     filter_links: list[str] = None,
     desired_subs: str = DESIRED_SUBS,
-    already_collected_animes: dict[str, dict[str, Any]] = dict()
+    already_collected_animes: dict[str, dict[str, Any]] = dict(),
 ) -> Dict[str, Any]:
     """
     Constructs a dictionary containing anime titles and corresponding lists
@@ -42,28 +42,28 @@ def build_json_with_links(
 
     This function fetches a list of animes entries and its subtitles information (
     download link and language) from animethosho website. Supports filtering
-    per link. For each title, it attempts to find a subtitle 
-    provider that matches the desired subtitle language or style (if specified). 
-    It collects and returns all relevant links to subtitles for each anime title 
+    per link. For each title, it attempts to find a subtitle
+    provider that matches the desired subtitle language or style (if specified).
+    It collects and returns all relevant links to subtitles for each anime title
     processed.
 
     Parameters:
     - page (int, optional): The page number from which to fetch data. Default is 1.
-    - limit_per_page (int, optional): The maximum number of anime titles to process from 
+    - limit_per_page (int, optional): The maximum number of anime titles to process from
         the fetched page. If you want all from the page, set to a high value like 999.
         Default is 1.
     - filter_links (list[str], optional): A specific page title to process.
         If not empty, will only process this link, page parameters are ignored.
         Default is an empty string.
-    - desired_subs (str, optional): The desired subtitle language (e.g. "eng"). 
+    - desired_subs (str, optional): The desired subtitle language (e.g. "eng").
         Default is "eng".
 
     Returns:
     - Dict[str, Any]: A dictionary containing data and metadata about the entry.
 
-    The function logs various information and errors throughout the processing, 
-    including issues with data fetching, provider selection, and subtitle retrieval. 
-    It continues processing next titles or pages until the specified limit is 
+    The function logs various information and errors throughout the processing,
+    including issues with data fetching, provider selection, and subtitle retrieval.
+    It continues processing next titles or pages until the specified limit is
     reached or there are no more entries.
     """
     logger = get_run_logger()
@@ -82,15 +82,11 @@ def build_json_with_links(
 
     # while this is kinda bad architecture, it's the simplest way without rewriting much code
     if filter_links:
-        logger.info(
-            f"Processing only links: {'; '.join(filter_links)}."
-        )
+        logger.info(f"Processing only links: {'; '.join(filter_links)}.")
         links = filter_links
         # we have to make a call here to get the anime title
         # this will be used for the table name
-        titles = [
-            read_url(url=link, process_fn=get_title_name) for link in links
-        ]
+        titles = [read_url(url=link, process_fn=get_title_name) for link in links]
 
     if not titles or not links:
         logger.info(f"Nothing to process on page {page}.")
@@ -105,8 +101,9 @@ def build_json_with_links(
         logger.info(f"Processing link: {link}")
         logger.info(f"Processing anime: {title}")
 
-        providers_info, episode_count, mal_id = \
-            get_batch_options_and_episode_count(title=title, link=link)
+        providers_info, episode_count, mal_id = get_batch_options_and_episode_count(
+            title=title, link=link
+        )
         logger.debug(f"Batch Providers: {providers_info}")
 
         # check if we already have this full entry
@@ -118,18 +115,15 @@ def build_json_with_links(
 
         if episode_count == 0 or mal_id == 0:
             # we will not be able to sort our data appropriatelly
-            logger.info(
-                "Could not find either episode count or MAL ID. Skipping..."
-            )
+            logger.info("Could not find either episode count or MAL ID. Skipping...")
             continue
 
         if len(providers_info) == 0:
             # nothing we can do
-            logger.warning(
-                f"No available provider for anime {title}. Skipping..."
-            )
+            logger.warning(f"No available provider for anime {title}. Skipping...")
             continue
 
+        # TODO: we need to rebuild this map to include recent animes
         is_relevant = check_for_id(mal_id=mal_id, members_cut=MEMBER_CUT)
         if not is_relevant:
             logger.info(
@@ -145,14 +139,11 @@ def build_json_with_links(
         for provider_name, info in providers_info.items():
             # link to test provider
             trial_link = info["trial_link"]
-            sub_info, sub_link = get_subtitle_links(
-                trial_link, desired_subs
-            )
+            sub_info, sub_link = get_subtitle_links(trial_link, desired_subs)
 
             if sub_info and sub_link:
                 provider_selected = provider_name
-                logger.info(
-                    f"Selected {provider_selected} provider for anime {title}.")
+                logger.info(f"Selected {provider_selected} provider for anime {title}.")
                 break
 
         if not provider_selected:
@@ -177,7 +168,7 @@ def build_json_with_links(
                 "episode_count": episode_count,
                 "mal_id": mal_id,
                 "original_name": title,
-            }
+            },
         }
 
         while processing:
@@ -202,9 +193,7 @@ def build_json_with_links(
         # if this is a new entry, we will write it regardless
         # however, if this is duplicate, we only want to write back to db if it has more eps
         current_id = data[anime_title]["metadata"]["mal_id"]
-        eps_in_db = already_collected_animes.get(
-            current_id, {}
-        ).get("ep_amount", 0)
+        eps_in_db = already_collected_animes.get(current_id, {}).get("ep_amount", 0)
 
         if eps_in_db >= len(all_subs_info):
             logger.info(

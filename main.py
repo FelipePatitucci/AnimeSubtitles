@@ -1,9 +1,11 @@
 import json
+
 # import logging
 import time
 import os
 import warnings
 from datetime import datetime
+
 # from pathlib import Path
 from typing import Any, Optional
 
@@ -23,7 +25,7 @@ from utils.readers import read_postgres
 from utils.routines import build_json_with_links
 from utils.writers import merge_quotes, write_postgres
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 # setup logger
 # logger = logging.getLogger(__name__)
 # logging.basicConfig(
@@ -45,26 +47,16 @@ def get_already_downloaded_animes(
     query: str,
 ) -> dict[str, dict[str, Any]]:
     con = postgres_connector(
-        user=user,
-        password=password,
-        host=host,
-        database=database,
-        port=port
+        user=user, password=password, host=host, database=database, port=port
     )
-    df = read_postgres(
-        con=con,
-        query=query
-    )
+    df = read_postgres(con=con, query=query)
     mapping = df.to_dict(orient="list")
     mal_ids = mapping["mal_id"]
     is_complete = mapping["completed"]
     ep_amount = mapping["ep_amount"]
 
     result = {
-        mal_id: {
-            "completed": status,
-            "ep_amount": ep_count
-        }
+        mal_id: {"completed": status, "ep_amount": ep_count}
         for mal_id, status, ep_count in zip(mal_ids, is_complete, ep_amount)
     }
 
@@ -79,7 +71,8 @@ def export_links_to_db(
     today = datetime.today()
 
     normalized_entries = [
-        json.dumps({"name": key, "info": value}) for key, value in data.items()
+        json.dumps({"name": key, "info": value})
+        for key, value in data.items()
         if value["data"]
     ]
     json_df = pd.DataFrame(
@@ -96,7 +89,7 @@ def export_links_to_db(
         table_name="json_reference",
         if_exists="append",
         clear_songs=False,
-        cleanup=True
+        cleanup=True,
     )
 
 
@@ -108,7 +101,7 @@ def get_links_from_web(
     desired_subs: str = DESIRED_SUBS,
     filter_links: Optional[list[str]] = None,
     already_collected_animes: dict[str, dict[str, Any]] = dict(),
-    save_links_on_db: bool = True
+    save_links_on_db: bool = True,
 ) -> None:
     logger = get_run_logger()
     start = time.time()
@@ -118,23 +111,16 @@ def get_links_from_web(
             limit_per_page=page_limit,
             desired_subs=desired_subs,
             filter_links=filter_links,
-            already_collected_animes=already_collected_animes
+            already_collected_animes=already_collected_animes,
         )
         with open(f"examples/page_{page}.json", "w+", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
-        if save_links_on_db:
+        if save_links_on_db and data:
             con = postgres_connector(
-                user=user,
-                password=password,
-                host=host,
-                database=database,
-                port=port
+                user=user, password=password, host=host, database=database, port=port
             )
-            export_links_to_db(
-                con=con,
-                data=data
-            )
+            export_links_to_db(con=con, data=data)
 
     end = time.time()
     logger.info(
@@ -146,14 +132,12 @@ def get_links_from_web(
 def get_subtitles_from_web(
     download_amount: int = 1,
     schema: str = "raw_quotes",
-    max_lines_per_episode: int = MAX_LINES_PER_EPISODE
+    max_lines_per_episode: int = MAX_LINES_PER_EPISODE,
 ) -> None:
     logger = get_run_logger()
     for idx, file in enumerate(os.listdir("examples")):
         if idx == download_amount:
-            logger.info(
-                f"Download amount of {download_amount} reached."
-            )
+            logger.info(f"Download amount of {download_amount} reached.")
             break
 
         file_path = "examples/" + file
@@ -169,11 +153,7 @@ def get_subtitles_from_web(
                 created = json.load(f).keys()
 
         con = postgres_connector(
-            user=user,
-            password=password,
-            host=host,
-            database=database,
-            port=port
+            user=user, password=password, host=host, database=database, port=port
         )
 
         try:
@@ -183,18 +163,13 @@ def get_subtitles_from_web(
                 df = build_df_from_ass_files(
                     file_path=file_path,
                     anime_name=anime,
-                    max_lines_per_episode=max_lines_per_episode
+                    max_lines_per_episode=max_lines_per_episode,
                 )
 
                 if df is None:
                     continue
 
-                df = merge_quotes(
-                    conn=con,
-                    schema=schema,
-                    table_name=anime,
-                    df=df
-                )
+                df = merge_quotes(conn=con, schema=schema, table_name=anime, df=df)
 
                 write_postgres(
                     df=df,
@@ -202,7 +177,7 @@ def get_subtitles_from_web(
                     schema=schema,
                     table_name=anime,
                     if_exists="replace",
-                    cleanup=False
+                    cleanup=False,
                 )
         except Exception as err:
             logger.error(err)
@@ -220,11 +195,9 @@ def populate_db(
     page_count: int = 1,
     page_limit: int = 1,
     filter_links: Optional[list[str]] = None,
-    schema: str = "raw_quotes"
+    schema: str = "raw_quotes",
 ) -> None:
-    anime_status_map = get_already_downloaded_animes(
-        query=query_json_data
-    )
+    anime_status_map = get_already_downloaded_animes(query=query_json_data)
 
     if get_links:
         get_links_from_web(
@@ -234,26 +207,20 @@ def populate_db(
             desired_subs=DESIRED_SUBS,
             filter_links=filter_links,
             already_collected_animes=anime_status_map,
-            save_links_on_db=True
+            save_links_on_db=True,
         )
 
     get_subtitles_from_web(
         download_amount=download_limit,
         schema=schema,
-        max_lines_per_episode=MAX_LINES_PER_EPISODE
+        max_lines_per_episode=MAX_LINES_PER_EPISODE,
     )
 
 
 @flow
-def download_files_from_anime(
-    mal_id: int
-) -> None:
+def download_files_from_anime(mal_id: int) -> None:
     conn = postgres_connector(
-        user=user,
-        password=password,
-        host=host,
-        database=database,
-        port=port
+        user=user, password=password, host=host, database=database, port=port
     )
     query = query_json_from_entry % mal_id
     df = read_postgres(con=conn, query=query, cleanup=True)
@@ -271,16 +238,14 @@ def download_files_from_anime(
     generate_ass_files()
 
 
-# populate_db(
-#     get_links=False,
-#     download_limit=1,
-#     page_start=1,
-#     page_count=1,
-#     page_limit=99,
-#     filter_links=["https://animetosho.org/series/sousou-no-frieren.17617"],
-#     schema="raw_quotes"
-# )
-
-download_files_from_anime(
-    mal_id=52991
+populate_db(
+    get_links=True,
+    download_limit=1,
+    page_start=1,
+    page_count=1,
+    page_limit=99,
+    # filter_links=["https://animetosho.org/series/sousou-no-frieren.17617"],
+    schema="raw_quotes",
 )
+
+# download_files_from_anime(mal_id=55791)
