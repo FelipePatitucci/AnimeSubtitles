@@ -1,30 +1,27 @@
-# import json
 import logging
 import os
-# import re
-import requests
-
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from prefect import get_run_logger
 
 from .constants import (
+    DESIRED_SUBS,
+    FORMAT,
     MAIN_URL,
     REMOVE_REPACK,
-    FORMAT,
-    DESIRED_SUBS,
 )
 from .helpers import (
-    get_provider,
     convert_title_to_size,
-    filter_subs,
-    create_folders_for_anime,
-    get_mal_id,
-    process_data_input,
     create_data_folder,
+    create_folders_for_anime,
+    filter_subs,
     find_episode_number,
+    get_mal_id,
+    get_provider,
+    process_data_input,
     remove_special_characters,
 )
 from .readers import read_url
@@ -32,22 +29,24 @@ from .readers import read_url
 # setup logger
 logger = logging.getLogger(__name__)
 logging.basicConfig(
-    format=FORMAT,
-    level=logging.INFO,
-    handlers=[logging.StreamHandler()])
+    format=FORMAT, level=logging.INFO, handlers=[logging.StreamHandler()]
+)
 
 
 def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
     logger = get_run_logger()
     url = MAIN_URL + f"?page={page}"
     finished_entries = []
-
     response = read_url(url=url)
-    data = response.text
-    soup = BeautifulSoup(data, 'html.parser')
 
-    for div in soup.find_all('div', class_='home_list_entry'):
-        if '(finished)' in div.text or '(movie)' in div.text:
+    if not response:
+        return []
+
+    data = response.text
+    soup = BeautifulSoup(data, "html.parser")
+
+    for div in soup.find_all("div", class_="home_list_entry"):
+        if "(finished)" in div.text or "(movie)" in div.text:
             finished_entries.append(div)
 
     logger.info(f"Processed page {page} request.")
@@ -56,15 +55,14 @@ def get_animes_finished_from_page(page: int = 1) -> List[Optional[Tag]]:
 
 
 def get_batch_options_and_episode_count(
-    title: str,
-    link: str
+    title: str, link: str
 ) -> tuple[dict[str, dict[str, Any]], int, int]:
     logger = get_run_logger()
     batch_options = {}
     url = link + REMOVE_REPACK
 
     res = read_url(url=url)
-    soup = BeautifulSoup(res.text, 'html.parser')
+    soup = BeautifulSoup(res.text, "html.parser")
 
     # get all candidates
     parent_divs = soup.find_all("div", class_="home_list_entry")
@@ -89,22 +87,16 @@ def get_batch_options_and_episode_count(
         if provider in batch_options:
             batch_options[provider]["amount"] += 1
         else:
-            batch_options[provider] = {
-                "amount": 1,
-                "trial_link": batch_obj.get("href")
-            }
+            batch_options[provider] = {"amount": 1, "trial_link": batch_obj.get("href")}
 
     # not a single option below 16gb for this anime
     if not batch_options:
-        logger.warning(
-            f"No available non-batch file below 16GB for anime {title}."
-        )
+        logger.warning(f"No available non-batch file below 16GB for anime {title}.")
 
     # get episode count
     episode_div = soup.select_one("table > tbody > tr > td > div > div")
     try:
-        episode_count = episode_div.text.split(
-            " episode(s)")[0].split(", ")[-1]
+        episode_count = episode_div.text.split(" episode(s)")[0].split(", ")[-1]
         logger.info(f"Got episode count of {episode_count}.")
 
     except Exception as err:
@@ -119,10 +111,7 @@ def get_batch_options_and_episode_count(
     return batch_options, int(episode_count), mal_id
 
 
-def get_subtitle_links(
-    link: str,
-    desired_subs: str = DESIRED_SUBS
-) -> Tuple[str, str]:
+def get_subtitle_links(link: str, desired_subs: str = DESIRED_SUBS) -> Tuple[str, str]:
     logger = get_run_logger()
     sub_info, sub_link = "", ""
 
@@ -133,7 +122,7 @@ def get_subtitle_links(
     if not res:
         return "", ""
 
-    soup = BeautifulSoup(res.text, 'html.parser')
+    soup = BeautifulSoup(res.text, "html.parser")
     content = soup.find("div", id="content")
     if not content:
         # no divs implies no subtitles
@@ -176,15 +165,13 @@ def parse_subtitles(subs: Optional[Tag]) -> Dict[str, str]:
 
 
 def get_all_links_from_provider(
-    provider: str,
-    page: str,
-    link: str
+    provider: str, page: str, link: str
 ) -> Tuple[List[Dict[str, str]], bool]:
     episode_links = []
     url = link + REMOVE_REPACK + f"&page={page}"
 
     res = read_url(url=url)
-    soup = BeautifulSoup(res.text, 'html.parser')
+    soup = BeautifulSoup(res.text, "html.parser")
     has_entries = False
 
     parent_divs = soup.find_all("div", class_="home_list_entry")
@@ -206,19 +193,18 @@ def get_all_links_from_provider(
 
             curr_link = candidate.find("div", class_="link").find("a")
             if provider in curr_link.text:
-                episode_links.append({
-                    "link_title": curr_link.text,
-                    "link_url": curr_link.get("href")
-                })
+                episode_links.append(
+                    {"link_title": curr_link.text, "link_url": curr_link.get("href")}
+                )
 
     return episode_links, has_entries
 
 
 def get_all_subtitles_info(
-        title: str,
-        anime_info: dict[str, Any],
-        provider_name: str,
-        desired_subs: str = DESIRED_SUBS
+    title: str,
+    anime_info: dict[str, Any],
+    provider_name: str,
+    desired_subs: str = DESIRED_SUBS,
 ) -> List[Dict[str, str]]:
     logger = get_run_logger()
     final_object = []
@@ -234,8 +220,7 @@ def get_all_subtitles_info(
     logger.info(f"Gathering subtitle links for anime {title}...")
 
     for idx, item in enumerate(anime_info["data"]):
-
-        if ((idx+1) % 10) == 0 or (idx + 1) == total_to_gather:
+        if ((idx + 1) % 10) == 0 or (idx + 1) == total_to_gather:
             logger.info(f"[Progress|Total]: [{idx+1}|{total_to_gather}]")
 
         if len(final_object) == episode_count:
@@ -248,9 +233,7 @@ def get_all_subtitles_info(
         link_url = item.get("link_url", "")
         link_title = item.get("link_title", "")
 
-        sub_info, sub_link = get_subtitle_links(
-            link_url, desired_subs=desired_subs
-        )
+        sub_info, sub_link = get_subtitle_links(link_url, desired_subs=desired_subs)
 
         # skip repeated episodes and episodes without subs
         if sub_link in already_obtained_links or not sub_link:
@@ -286,7 +269,6 @@ def get_all_subtitles_info(
 
 
 def get_subtitle_file(link: str) -> Optional[requests.Response]:
-
     response = read_url(url=link)
     # logger.warning(
     #     f"Error when downloading file from link: {link}. (attempt {attempt+1})"
@@ -295,10 +277,7 @@ def get_subtitle_file(link: str) -> Optional[requests.Response]:
     return response
 
 
-def save_subtitle_file(
-    response: Optional[requests.Response],
-    file_path: str
-) -> bool:
+def save_subtitle_file(response: Optional[requests.Response], file_path: str) -> bool:
     completed = False
     # bad request, did not got file
     if not response:
@@ -307,14 +286,15 @@ def save_subtitle_file(
     # proceed if request is successful
     if response.status_code == 200:
         filename = file_path.split("/")[-1]
-        with open(file_path, 'wb') as file:
+        with open(file_path, "wb") as file:
             # write response object to file
             file.write(response.content)
-            logger.debug(f'{filename} downloaded successfully.')
+            logger.debug(f"{filename} downloaded successfully.")
             completed = True
     else:
         logger.error(
-            f'Failed to download {filename}. Status code:', response.status_code)
+            f"Failed to download {filename}. Status code:", response.status_code
+        )
 
     return completed
 
@@ -337,9 +317,9 @@ def download_subtitles(
     except Exception as e:
         raise e
 
-    filter_anime = remove_special_characters(
-        input_string=filter_anime
-    ).replace(" ", "_").lower()
+    filter_anime = (
+        remove_special_characters(input_string=filter_anime).replace(" ", "_").lower()
+    )
     # iterate over every anime on .json file
     for anime, anime_info in data.items():
         # target just entry/entries from filter
@@ -357,35 +337,28 @@ def download_subtitles(
         result = create_folders_for_anime(anime_name=anime)
 
         if not result:
-            logger.warning(
-                f"Failed creating folders for anime {anime}. Skipping..."
-            )
+            logger.warning(f"Failed creating folders for anime {anime}. Skipping...")
             continue
 
-        folder_path = f'data/{anime}/raw'
+        folder_path = f"data/{anime}/raw"
 
         logger.info("Downloading subtitles...")
         for idx, entry in enumerate(entries):
-
-            if ((idx+1) % 10) == 0 or (idx+1) == len(entries):
+            if ((idx + 1) % 10) == 0 or (idx + 1) == len(entries):
                 logger.info(f"[Progress|Total]: [{idx+1}|{len(entries)}]")
 
             episode = entry.get("episode_number", "")
             if not episode:
                 # we dont even know the ep number, no reason to save this
-                logger.debug(
-                    f"No episode number for entry {entry['link_title']}."
-                )
+                logger.debug(f"No episode number for entry {entry['link_title']}.")
                 continue
 
-            filename = f'ep_{episode}.xz'
+            filename = f"ep_{episode}.xz"
             sub_link = entry.get("sub_link", "")
 
             if not sub_link:
                 # not sub link available
-                logger.debug(
-                    f"Subtitle file for episode {episode} does not exists."
-                )
+                logger.debug(f"Subtitle file for episode {episode} does not exists.")
                 continue
 
             # check if file is already downloaded
@@ -393,28 +366,22 @@ def download_subtitles(
                 # path like data/anime_name/ep_number.xz
                 file_path = os.path.join(folder_path, filename)
                 sub_file = get_subtitle_file(link=sub_link)
-                completed = save_subtitle_file(
-                    response=sub_file, file_path=file_path
-                )
+                completed = save_subtitle_file(response=sub_file, file_path=file_path)
                 if not completed:
                     error_count += 1
 
             else:
-                logger.debug(
-                    f'{folder_path + "/" + filename} is already downloaded'
-                )
+                logger.debug(f'{folder_path + "/" + filename} is already downloaded')
                 continue
 
         logger.info(f"Finished downloading files for anime {anime}.")
         if error_count > 0:
-            logger.info(
-                f"Failed {error_count} from a total of {len(entries)} files."
-            )
+            logger.info(f"Failed {error_count} from a total of {len(entries)} files.")
 
     return
 
 
 def get_title_name(res: requests.Response) -> str:
-    soup = BeautifulSoup(res.text, 'html.parser')
+    soup = BeautifulSoup(res.text, "html.parser")
     title_name_div = soup.select_one("body > div > div > div > div > h2")
     return title_name_div.text
